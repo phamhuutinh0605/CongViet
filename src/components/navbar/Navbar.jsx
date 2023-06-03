@@ -32,12 +32,15 @@ function Navbar() {
       <div className="container">
         <div className="logo">
           <Link className="link" to="/">
-            <span className="text">Côngviệt</span>
+            <span className="text">
+              <span>Công</span>
+              <span>việt</span>
+            </span>
           </Link>
           <span className="dot">.</span>
         </div>
         <div className="links">
-          <span>Fiver Business</span>
+          <span>Doanh Nghiệp</span>
           <span>Khám phá</span>
           {!currentUser?.isSeller && <span>Trở thành Người bán</span>}
           {currentUser ? (
