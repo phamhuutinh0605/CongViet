@@ -1,28 +1,21 @@
 .home {
   .features {
-    background-color: #FFD447;
+    background-color: #f1f2f6;
     display: flex;
     justify-content: center;
     padding: 100px 0px;
 
     &.dark {
-      background-color: #FFD447;
-
-      h1 {
-        color: white !important;
-      }
-
+      background-color: #f1f2f6;
       i {
         font-weight: 300;
       }
 
       p {
         margin-bottom: 20px;
-        color: white !important;
       }
 
       .title {
-        color: white !important;
         font-weight: 300 !important;
         font-size: 14px !important;
       }
@@ -30,7 +23,7 @@
       button {
         background-color: #B22234;
         border: none;
-        color: white;
+        color: #ffbf00;
         padding: 10px 20px;
         border-radius: 5px;
         width: max-content;
@@ -90,7 +83,7 @@
     }
 
     //   &.reverse {
-    //     background-color: #FFD447;
+    //     background-color: #f1f2f6;
     //     color: white;
     //     .container {
     //       flex-direction: row-reverse;
@@ -130,6 +123,7 @@
           img {
             width: 50px;
             height: 50px;
+            background-color: #ffbf00;
           }
 
           .line{

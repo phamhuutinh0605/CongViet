@@ -127,7 +127,7 @@ function Home() {
                 alt=""
               />
               <div className="line"></div>
-              <span>Lifestyle</span>
+              <span>Phong cách cuộc sống</span>
             </div>
             <div className="item">
               <img
@@ -151,9 +151,7 @@ function Home() {
       <div className="features dark">
         <div className="container">
           <div className="item">
-            <h1>
-              Fiverr <i>business</i>
-            </h1>
+            <h1>Doanh Nghiệp</h1>
             <h1>
               Giải pháp kinh doanh dành cho <i>đội nhóm</i>
             </h1>
@@ -172,7 +170,7 @@ function Home() {
               Quản lý công việc nhóm và tăng năng suất với một không gian làm
               việc mạnh mẽ
             </div>
-            <button>Khám phá Fiverr Business</button>
+            <button>Khám phá Nhà Tuyển Dụng</button>
           </div>
           <div className="item">
             <img

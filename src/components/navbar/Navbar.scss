@@ -86,10 +86,11 @@
         border: 1px solid white;
         background-color: transparent;
         cursor: pointer;
-
+        transition: 0.3s ease;
         &:hover {
           background-color: #B22234;
-          border-color: #B22234;
+          border-color: #ffbf00;
+          color: #ffbf00;
         }
       }
     }

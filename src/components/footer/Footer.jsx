@@ -28,14 +28,14 @@ function Footer() {
             <span>Điều khoản dịch vụ</span>
             <span>Quyền sở hữu trí tuệ</span>
             <span>Quan hệ đầu tư</span>
-            <span>Liên hệ bán hàng</span>
+            <span>Liên hệ tìm việc</span>
           </div>
           <div className="item">
             <h2>Hỗ trợ</h2>
             <span>Trợ giúp & Hỗ trợ</span>
             <span>Đáng tin cậy & An toàn</span>
-            <span>Bán hàng trên Côngviệt</span>
-            <span>Mua hàng trên Côngviệt</span>
+            <span>Tìm việc trên CôngVIỆT</span>
+            <span>Mua hàng trên CôngVIỆT</span>
           </div>
           <div className="item">
             <h2>Cộng đồng</h2>
@@ -48,19 +48,19 @@ function Footer() {
             <span>Liên kết</span>
             <span>Podcast</span>
             <span>Mời bạn bè</span>
-            <span>Trở thành Người bán</span>
+            <span>Tạo công việc của bạn</span>
             <span>Tiêu chuẩn cộng đồng</span>
           </div>
           <div className="item">
-            <h2>Thêm từ Côngviệt</h2>
-            <span>Côngviệt Business</span>
-            <span>Côngviệt Pro</span>
-            <span>Côngviệt Logo Maker</span>
-            <span>Côngviệt Guides</span>
+            <h2>Thêm từ CôngVIỆT</h2>
+            <span>CôngVIỆT Business</span>
+            <span>CôngVIỆT Pro</span>
+            <span>CôngVIỆT Logo Maker</span>
+            <span>CôngVIỆT Guides</span>
             <span>Được truyền cảm hứng</span>
-            <span>Côngviệt Select</span>
+            <span>CôngVIỆT Select</span>
             <span>ClearVoice</span>
-            <span>Côngviệt Workspace</span>
+            <span>CôngVIỆT Workspace</span>
             <span>Học tập</span>
             <span>Working Not Working</span>
           </div>
@@ -68,8 +68,10 @@ function Footer() {
         <hr />
         <div className="bottom">
           <div className="left">
-            <h2>Côngviệt</h2>
-            <span>© Côngviệt International Ltd. 2023</span>
+            <h2>
+              Công <span>VIỆT</span>
+            </h2>
+            <span>© CôngVIỆT International Ltd. 2023</span>
           </div>
           <div className="right">
             <div className="social">

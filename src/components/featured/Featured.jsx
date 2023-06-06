@@ -7,12 +7,12 @@ function Featured() {
       <div className="container">
         <div className="left">
           <h1>
-            Tìm dịch vụ <span>freelance</span> hoàn hảo cho doanh nghiệp của bạn
+            Công <span>VIỆT</span> - Việc làm cho người <span>VIỆT</span>
           </h1>
           <div className="search">
             <div className="searchInput">
               <img src="./img/search.png" alt="" />
-              <input type="text" placeholder='Thử "tìm những gì bạn muốn "' />
+              <input type="text" placeholder='"Tìm những gì bạn muốn "' />
             </div>
             <button>Tìm kiếm</button>
           </div>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./Navbar.scss";
+import newRequest from "../../utils/newRequest";
 
 function Navbar() {
   const [active, setActive] = useState(false);
@@ -21,12 +22,14 @@ function Navbar() {
 
   // const currentUser = null
 
-  const currentUser = {
-    id: 1,
-    username: "Ly Ly",
-    isSeller: true,
-  };
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
+  const handleLogout = async () => {
+    try {
+      localStorage.setItem("currentUser", null);
+      await newRequest.post("/auth/logout");
+    } catch (error) {}
+  };
   return (
     <div className={active || pathname !== "/" ? "navbar active" : "navbar"}>
       <div className="container">
@@ -34,24 +37,23 @@ function Navbar() {
           <Link className="link" to="/">
             <span className="text">
               <span>Công</span>
-              <span>việt</span>
             </span>
           </Link>
-          <span className="dot">.</span>
+          <span className="dot">VIỆT</span>
         </div>
         <div className="links">
           <span>Doanh Nghiệp</span>
           <span>Khám phá</span>
-          {!currentUser?.isSeller && <span>Trở thành Người bán</span>}
+          {!currentUser?.isSeller && <span>Tạo công việc của bạn</span>}
           {currentUser ? (
             <div className="user" onClick={() => setOpen(!open)}>
-              <img
-                src="https://images.pexels.com/photos/1115697/pexels-photo-1115697.jpeg?auto=compress&cs=tinysrgb&w=1600"
-                alt=""
-              />
+              <img src={currentUser.img || "/img/noavatar.jpg"} alt="" />
               <span>{currentUser?.username}</span>
               {open && (
                 <div className="options">
+                  <Link className="link" to="/">
+                    Thông tin cá nhân
+                  </Link>
                   {currentUser.isSeller && (
                     <>
                       <Link className="link" to="/mygigs">
@@ -68,7 +70,7 @@ function Navbar() {
                   <Link className="link" to="/messages">
                     Tin nhắn
                   </Link>
-                  <Link className="link" to="/">
+                  <Link className="link" to="/" onClick={handleLogout}>
                     Đăng xuất
                   </Link>
                 </div>
@@ -76,9 +78,11 @@ function Navbar() {
             </div>
           ) : (
             <>
-              <span>Đăng nhập</span>
+              <Link to="/login">
+                <button>Đăng nhập</button>
+              </Link>
               <Link className="link" to="/register">
-                <button>Tham gia</button>
+                <button>Đăng ký</button>
               </Link>
             </>
           )}

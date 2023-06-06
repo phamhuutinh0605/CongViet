@@ -18,14 +18,16 @@ const Messages = () => {
     <div className="messages">
       <div className="container">
         <div className="title">
-          <h1>Messages</h1>
+          <h1>Tin Nhắn</h1>
         </div>
         <table>
           <tr>
-            <th>{currentUser.isSeller ? "Buyer" : "Seller"}</th>
-            <th>Last Message</th>
-            <th>Date</th>
-            <th>Action</th>
+            <th>
+              {currentUser.isSeller ? "Nhà tuyển dụng" : "Người Tìm Việc"}
+            </th>
+            <th>Tin nhắn mới nhất</th>
+            <th>Ngày</th>
+            <th>Trạng thái</th>
           </tr>
           <tr className="active">
             <td>Charley Sharp</td>
@@ -34,9 +36,9 @@ const Messages = () => {
                 {message.substring(0, 100)}...
               </Link>
             </td>
-            <td>1 hour ago</td>
+            <td>1 giờ trước</td>
             <td>
-              <button>Mark as Read</button>
+              <button>Nhấn để đọc</button>
             </td>
           </tr>
           <tr className="active">
@@ -47,9 +49,9 @@ const Messages = () => {
                 {message.substring(0, 100)}...
               </Link>
             </td>
-            <td>2 hours ago</td>
+            <td>2 giờ trước</td>
             <td>
-              <button>Mark as Read</button>
+              <button>Nhấn để đọc</button>
             </td>
           </tr>
           <tr>
@@ -59,7 +61,7 @@ const Messages = () => {
                 {message.substring(0, 100)}...
               </Link>
             </td>
-            <td>1 day ago</td>
+            <td>1 ngày trước</td>
           </tr>
           <tr>
             <td>Garner David </td>
@@ -68,12 +70,12 @@ const Messages = () => {
                 {message.substring(0, 100)}...
               </Link>
             </td>
-            <td>2 days ago</td>
+            <td>2 ngày trước</td>
           </tr>
           <tr>
             <td>Troy Oliver</td>
             <td>{message.substring(0, 100)}</td>
-            <td>1 week ago</td>
+            <td>1 tuần trước</td>
           </tr>
         </table>
       </div>

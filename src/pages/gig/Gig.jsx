@@ -8,9 +8,9 @@ function Gig() {
       <div className="container">
         <div className="left">
           <span className="breadcrumbs">
-            Fiver {">"} Graphics & Design {">"}
+            Fiver {">"} Đồ họa & Thiết kế {">"}
           </span>
-          <h1>I will create ai generated art for you</h1>
+          <h1>Tôi sẽ tạo nghệ thuật được tạo bởi trí tuệ nhân tạo cho bạn</h1>
           <div className="user">
             <img
               className="pp"
@@ -122,7 +122,7 @@ function Gig() {
                   <span>Lê Văn Ẫu</span>
                   <div className="country">
                     <img
-                      src="https://Côngviệt-dev-res.cloudinary.com/general_assets/flags/1f1fa-1f1f8.png"
+                      src="https://fiverr-dev-res.cloudinary.com/general_assets/flags/1f1fa-1f1f8.png"
                       alt=""
                     />
                     <span>Tp. Hồ Chí Minh</span>
@@ -139,7 +139,7 @@ function Gig() {
               </div>
               <p>
                 Tôi chỉ muốn nói rằng art_with_ai là nghệ sĩ đầu tiên và sau đó,
-                là người duy nhất mà tôi sẽ sử dụng trên Côngviệt. Giao tiếp
+                là người duy nhất mà tôi sẽ sử dụng trên CôngVIỆT. Giao tiếp
                 tuyệt vời, mỗi ngày anh ấy gửi cho tôi những hình ảnh mà tôi có
                 thể yêu cầu thay đổi. Họ lắng nghe, hiểu và vượt xa mong đợi của
                 tôi. Tôi hoàn toàn khuyến nghị dịch vụ này và tôi đã biết rằng
@@ -165,7 +165,7 @@ function Gig() {
                   <span>Sidney Owen</span>
                   <div className="country">
                     <img
-                      src="https://Côngviệt-dev-res.cloudinary.com/general_assets/flags/1f1e9-1f1ea.png"
+                      src="https://fiverr-dev-res.cloudinary.com/general_assets/flags/1f1e9-1f1ea.png"
                       alt=""
                     />
                     <span>Đức</span>
@@ -206,7 +206,7 @@ function Gig() {
                   <span>Lyle Giles</span>
                   <div className="country">
                     <img
-                      src="https://Côngviệt-dev-res.cloudinary.com/general_assets/flags/1f1fa-1f1f8.png"
+                      src="https://CôngVIỆT-dev-res.cloudinary.com/general_assets/flags/1f1fa-1f1f8.png"
                       alt=""
                     />
                     <span>Hoa Kỳ</span>

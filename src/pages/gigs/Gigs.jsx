@@ -23,34 +23,34 @@ function Gigs() {
     <div className="gigs">
       <div className="container">
         <span className="breadcrumbs">
-          Fiver {">"} Graphics & Design {">"}
+          Fiver {">"} Đồ họa & Thiết kế {">"}
         </span>
-        <h1>AI Artists</h1>
+        <h1>Nghệ sĩ AI</h1>
         <p>
-          Explore the boundaries of art and technology with Côngviệt's AI
-          artists
+          Khám phá ranh giới của nghệ thuật và công nghệ với các nghệ sĩ AI của
+          CôngVIỆT
         </p>
         <div className="menu">
           <div className="left">
-            <span>Budget</span>
-            <input ref={minRef} type="number" placeholder="min" />
-            <input ref={maxRef} type="number" placeholder="max" />
-            <button onClick={apply}>Apply</button>
+            <span>Ngân sách</span>
+            <input ref={minRef} type="number" placeholder="tối thiểu" />
+            <input ref={maxRef} type="number" placeholder="tối đa" />
+            <button onClick={apply}>Áp dụng</button>
           </div>
           <div className="right">
-            <span className="sortBy">Sort by</span>
+            <span className="sortBy">Sắp xếp theo</span>
             <span className="sortType">
-              {sort === "sales" ? "Best Selling" : "Newest"}
+              {sort === "sales" ? "Bán chạy nhất" : "Mới nhất"}
             </span>
             <img src="./img/down.png" alt="" onClick={() => setOpen(!open)} />
             {open && (
               <div className="rightMenu">
                 {sort === "sales" ? (
-                  <span onClick={() => reSort("createdAt")}>Newest</span>
+                  <span onClick={() => reSort("createdAt")}>Mới nhất</span>
                 ) : (
-                  <span onClick={() => reSort("sales")}>Best Selling</span>
+                  <span onClick={() => reSort("sales")}>Bán chạy nhất</span>
                 )}
-                <span onClick={() => reSort("sales")}>Popular</span>
+                <span onClick={() => reSort("sales")}>Phổ biến</span>
               </div>
             )}
           </div>

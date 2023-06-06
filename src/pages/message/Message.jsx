@@ -7,7 +7,7 @@ const Message = () => {
     <div className="message">
       <div className="container">
         <span className="breadcrumbs">
-          <Link to="/messages">Messages</Link> {">"} John Doe {">"}
+          <Link to="/messages">Tin Nhắn</Link> {">"} Ly Ly {">"}
         </span>
         <div className="messages">
           <div className="item">
