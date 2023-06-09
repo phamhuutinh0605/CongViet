@@ -9,10 +9,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tanstack/react-query": "^4.29.12",
     "axios": "^1.4.0",
     "infinite-react-carousel": "^1.2.11",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-query": "^3.39.3",
     "react-router-dom": "^6.8.0",
     "sass": "^1.58.0"
   },

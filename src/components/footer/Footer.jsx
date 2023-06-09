@@ -69,7 +69,7 @@ function Footer() {
         <div className="bottom">
           <div className="left">
             <h2>
-              Công <span>VIỆT</span>
+              Công<span>VIỆT</span>
             </h2>
             <span>© CôngVIỆT International Ltd. 2023</span>
           </div>

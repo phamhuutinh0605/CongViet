@@ -7,7 +7,7 @@ function Featured() {
       <div className="container">
         <div className="left">
           <h1>
-            Công <span>VIỆT</span> - Việc làm cho người <span>VIỆT</span>
+            Công<span>VIỆT</span> - Việc làm cho người <span>VIỆT</span>
           </h1>
           <div className="search">
             <div className="searchInput">

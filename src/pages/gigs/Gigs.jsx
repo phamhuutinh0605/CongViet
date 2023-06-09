@@ -1,29 +1,43 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./Gigs.scss";
-import { gigs } from "../../data";
 import GigCard from "../../components/gigCard/GigCard";
+import { useQuery } from "@tanstack/react-query";
+import newRequest from "../../utils/newRequest";
+import { useLocation } from "react-router-dom";
 
 function Gigs() {
   const [sort, setSort] = useState("sales");
   const [open, setOpen] = useState(false);
   const minRef = useRef();
   const maxRef = useRef();
-
+  const { search } = useLocation();
+  const { data, isLoading, error, refetch } = useQuery({
+    queryKey: ["gigs"],
+    queryFn: async () => {
+      return await newRequest(
+        `/gigs${decodeURIComponent(search)}&min=${minRef.current.value}&max=${
+          maxRef.current.value
+        }&sort=${sort}`
+      ).then((res) => res.data);
+    },
+  });
   const reSort = (type) => {
     setSort(type);
     setOpen(false);
   };
 
   const apply = () => {
-    console.log(minRef.current.value);
-    console.log(maxRef.current.value);
+    refetch();
   };
+  useEffect(() => {
+    refetch();
+  }, [sort]);
 
   return (
     <div className="gigs">
       <div className="container">
         <span className="breadcrumbs">
-          Fiver {">"} Đồ họa & Thiết kế {">"}
+          CôngVIỆT {">"} Đồ họa & Thiết kế {">"}
         </span>
         <h1>Nghệ sĩ AI</h1>
         <p>
@@ -33,8 +47,8 @@ function Gigs() {
         <div className="menu">
           <div className="left">
             <span>Ngân sách</span>
-            <input ref={minRef} type="number" placeholder="tối thiểu" />
-            <input ref={maxRef} type="number" placeholder="tối đa" />
+            <input ref={minRef} type="text" placeholder="tối thiểu" />
+            <input ref={maxRef} type="text" placeholder="tối đa" />
             <button onClick={apply}>Áp dụng</button>
           </div>
           <div className="right">
@@ -56,9 +70,12 @@ function Gigs() {
           </div>
         </div>
         <div className="cards">
-          {gigs.map((gig) => (
-            <GigCard key={gig.id} item={gig} />
-          ))}
+          {isLoading
+            ? "Loading..."
+            : error
+            ? "Error Page"
+            : data?.map((gig) => <GigCard key={gig._id} item={gig} />)}
+          {data?.length < 1 && <span>Không tìm thấy công việc nào!</span>}
         </div>
       </div>
     </div>
