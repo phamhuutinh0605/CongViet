@@ -53,6 +53,12 @@ export const cards = [
     desc: "Pha chế đồ uống",
     img: "https://jerichocoffeetraders.com/cdn/shop/products/barista-training-latte-art_300x.jpg?v=1675932862",
   },
+  {
+    id: 10,
+    title: "Viết lách và Phiên dịch",
+    desc: "Thiết Kế Đồ Họa",
+    img: "https://images.pexels.com/photos/7532110/pexels-photo-7532110.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
+  },
 ];
 
 export const projects = [

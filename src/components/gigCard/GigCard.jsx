@@ -33,8 +33,8 @@ const GigCard = ({ item }) => {
           <div className="star">
             <img src="./img/star.png" alt="" />
             <span>
-              {!isNaN(item.totalStars / item.starNumber) &&
-                Math.round(data?.totalStar / data?.starNumber)}
+              {Math.round(item.totalStars / item.starNumber) |
+                "Chưa có đánh giá nào!"}
             </span>
           </div>
         </div>

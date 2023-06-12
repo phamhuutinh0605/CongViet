@@ -14,8 +14,8 @@ const Reviews = ({ gigId }) => {
   });
 
   const mutation = useMutation({
-    mutationFn: (review) => {
-      return newRequest.post("/reviews", review);
+    mutationFn: async (review) => {
+      return await newRequest.post("/reviews", review);
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["reviews"]);
@@ -26,7 +26,8 @@ const Reviews = ({ gigId }) => {
     e.preventDefault();
     const desc = e.target[0].value;
     const star = e.target[1].value;
-    mutation.mutate({ gigId, desc, star });
+    mutation.mutate({ gigId: gigId, desc: desc, star: star });
+    console.log(desc, star, gigId);
   };
 
   return (
@@ -40,7 +41,7 @@ const Reviews = ({ gigId }) => {
       <div className="add">
         <h3>Thêm đánh giá về người này</h3>
         <form action="" className="addForm" onSubmit={handleSubmit}>
-          <input type="text" placeholder="write your opinion" />
+          <input type="text" placeholder="Nói ra cảm nghĩ của bạn" />
           <select name="" id="">
             <option value={1}>1</option>
             <option value={2}>2</option>

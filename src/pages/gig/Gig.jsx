@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Link, useParams } from "react-router-dom";
 import newRequest from "../../utils/newRequest";
 import Reviews from "../../components/reviews/Reviews";
+import { formatDate } from "../../utils/formatDate";
 
 function Gig() {
   const { id } = useParams();
@@ -29,6 +30,7 @@ function Gig() {
       }),
     enabled: !!userId,
   });
+  console.log(formatDate(dataUser?.createdAt));
   return (
     <div className="gig">
       {isLoading ? (
@@ -42,7 +44,7 @@ function Gig() {
               CôngVIỆT {">"} {data?.title} {">"}
             </span>
             <h1>{data?.title}</h1>
-            {isLoadingUser ? (
+            {/* {isLoadingUser ? (
               "loading"
             ) : errorUser ? (
               "Something went wrong!"
@@ -67,8 +69,8 @@ function Gig() {
                   </div>
                 )}
               </div>
-            )}
-            {data?.images?.length < 1 ? (
+            )} */}
+            {/* {data?.images?.length < 1 ? (
               "Không có ảnh mô tả!"
             ) : (
               <Slider slidesToShow={1} arrowsScroll={1} className="slider">
@@ -76,7 +78,7 @@ function Gig() {
                   <img key={img} src={img} alt="" />
                 ))}
               </Slider>
-            )}
+            )} */}
             <h2>Về Công Việc</h2>
             <p>{data?.desc}</p>
             {isLoadingUser ? (
@@ -113,7 +115,9 @@ function Gig() {
                     </div>
                     <div className="item">
                       <span className="title">Thành viên từ</span>
-                      <span className="desc">Tháng 8 năm 2022</span>
+                      <span className="desc">
+                        {formatDate(dataUser?.createdAt)}
+                      </span>
                     </div>
                     <div className="item">
                       <span className="title">

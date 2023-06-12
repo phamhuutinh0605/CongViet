@@ -29,6 +29,13 @@ function Gigs() {
   const apply = () => {
     refetch();
   };
+  const removeFirstCharacter = (str) => {
+    if (str.length === 0) {
+      return "";
+    }
+    return str.slice(5);
+  };
+
   useEffect(() => {
     refetch();
   }, [sort]);
@@ -37,13 +44,10 @@ function Gigs() {
     <div className="gigs">
       <div className="container">
         <span className="breadcrumbs">
-          CôngVIỆT {">"} Đồ họa & Thiết kế {">"}
+          CôngVIỆT {">"} {removeFirstCharacter(decodeURIComponent(search))}{" "}
+          {">"}
         </span>
-        <h1>Nghệ sĩ AI</h1>
-        <p>
-          Khám phá ranh giới của nghệ thuật và công nghệ với các nghệ sĩ AI của
-          CôngVIỆT
-        </p>
+        <h1>{removeFirstCharacter(decodeURIComponent(search))}</h1>
         <div className="menu">
           <div className="left">
             <span>Ngân sách</span>
