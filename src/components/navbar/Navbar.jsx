@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./Navbar.scss";
 import newRequest from "../../utils/newRequest";
-
+import { cards } from "../../data.js";
 function Navbar() {
   const [active, setActive] = useState(false);
   const [open, setOpen] = useState(false);
@@ -21,14 +21,15 @@ function Navbar() {
   }, []);
 
   // const currentUser = null
-
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
   const handleLogout = async () => {
     try {
       localStorage.setItem("currentUser", null);
       await newRequest.post("/auth/logout");
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div className={active || pathname !== "/" ? "navbar active" : "navbar"}>
@@ -92,33 +93,13 @@ function Navbar() {
         <>
           <hr />
           <div className="menu">
-            <Link className="link menuLink" to="/">
-              Đồ họa & Thiết kế
-            </Link>
-            <Link className="link menuLink" to="/">
-              Video & Hoạt hình
-            </Link>
-            <Link className="link menuLink" to="/">
-              Viết lách & Phiên dịch
-            </Link>
-            <Link className="link menuLink" to="/">
-              Dịch vụ AI
-            </Link>
-            <Link className="link menuLink" to="/">
-              Marketing số hóa
-            </Link>
-            <Link className="link menuLink" to="/">
-              Âm nhạc & Âm thanh
-            </Link>
-            <Link className="link menuLink" to="/">
-              Lập trình & Công nghệ
-            </Link>
-            <Link className="link menuLink" to="/">
-              Kinh doanh
-            </Link>
-            <Link className="link menuLink" to="/">
-              Lối sống
-            </Link>
+            {cards.map((cat) => {
+              return (
+                <Link className="link menuLink" to={`/gigs?cat=${cat.title}`}>
+                  {cat.title}
+                </Link>
+              );
+            })}
           </div>
           <hr />
         </>

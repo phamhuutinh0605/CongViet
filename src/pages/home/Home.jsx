@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import "./Home.scss";
 import Featured from "../../components/featured/Featured";
 import TrustedBy from "../../components/trustedBy/TrustedBy";
@@ -8,6 +8,13 @@ import ProjectCard from "../../components/projectCard/ProjectCard";
 import { cards, projects } from "../../data";
 
 function Home() {
+  const videoRef = useRef(false);
+  // useEffect(() => {
+  //   async function handlePlayAuto() {
+  //     return videoRef?.current?.play();
+  //   }
+  //   handlePlayAuto();
+  // }, []);
   return (
     <div className="home">
       <Featured />
@@ -21,7 +28,8 @@ function Home() {
         <div className="container">
           <div className="item">
             <h1>
-              Một thế giới toàn cầu của những tài năng tự do trong tầm tay bạn
+              Một Việt Nam của những tài năng tự do tìm kiếm công việc trong tầm
+              tay bạn
             </h1>
             <div className="title">
               <img src="./img/check.png" alt="" />
@@ -56,9 +64,14 @@ function Home() {
               giờ, chỉ có giá dự án.
             </p>
           </div>
-          <div className="item">
-            <video src="./img/video.mp4" controls />
-          </div>
+          <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/Au6LqK1UH8g?autoplay=1&mute=1&start=5"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          ></iframe>
         </div>
       </div>
       <div className="explore">
@@ -151,7 +164,6 @@ function Home() {
       <div className="features dark">
         <div className="container">
           <div className="item">
-            <h1>Doanh Nghiệp</h1>
             <h1>
               Giải pháp kinh doanh dành cho <i>đội nhóm</i>
             </h1>
