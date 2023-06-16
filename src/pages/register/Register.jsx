@@ -39,6 +39,7 @@ function Register() {
     }
     try {
       await newRequest.post("/auth/register", user);
+      localStorage.setItem("currentUser", JSON.stringify(user));
       navigate("/");
     } catch (err) {
       console.log(err);

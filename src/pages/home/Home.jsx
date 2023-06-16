@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import "./Home.scss";
 import Featured from "../../components/featured/Featured";
 import TrustedBy from "../../components/trustedBy/TrustedBy";
@@ -8,13 +8,6 @@ import ProjectCard from "../../components/projectCard/ProjectCard";
 import { cards, projects } from "../../data";
 
 function Home() {
-  const videoRef = useRef(false);
-  // useEffect(() => {
-  //   async function handlePlayAuto() {
-  //     return videoRef?.current?.play();
-  //   }
-  //   handlePlayAuto();
-  // }, []);
   return (
     <div className="home">
       <Featured />
