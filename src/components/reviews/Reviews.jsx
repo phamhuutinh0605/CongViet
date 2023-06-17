@@ -3,6 +3,7 @@ import React from "react";
 import newRequest from "../../utils/newRequest";
 import Review from "../review/Review";
 import "./Reviews.scss";
+import { ToastContainer, toast } from "react-toastify";
 const Reviews = ({ gigId }) => {
   const queryClient = useQueryClient();
   const { isLoading, error, data } = useQuery({
@@ -20,6 +21,11 @@ const Reviews = ({ gigId }) => {
     onSuccess: () => {
       queryClient.invalidateQueries(["reviews"]);
     },
+    onError:(err)=>{
+       return  toast.error(err.response.data, {
+          position: toast.POSITION.TOP_RIGHT
+        });
+       }
   });
 
   const handleSubmit = (e) => {
@@ -36,7 +42,7 @@ const Reviews = ({ gigId }) => {
       {isLoading
         ? "loading"
         : error
-        ? "Something went wrong!"
+        ? <ToastContainer />
         : data.map((review) => <Review key={review._id} review={review} />)}
       <div className="add">
         <h3>Thêm đánh giá về người này</h3>

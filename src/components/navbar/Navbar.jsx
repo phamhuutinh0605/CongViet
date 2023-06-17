@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import "./Navbar.scss";
 import newRequest from "../../utils/newRequest";
 import { cards } from "../../data.js";
+import { ToastContainer, toast } from "react-toastify";
 function Navbar() {
   const [active, setActive] = useState(false);
   const [open, setOpen] = useState(false);
@@ -22,13 +23,26 @@ function Navbar() {
 
   // const currentUser = null
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-
+  const user = currentUser?.user;
+ useEffect(()=>{
+  if (currentUser?.user) {
+    toast.success("Đăng nhập thành công", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+  }
+ },[])
   const handleLogout = async () => {
     try {
       localStorage.setItem("currentUser", null);
       await newRequest.post("/auth/logout");
+      toast.info("Đăng xuất thành công", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
     } catch (error) {
       console.log(error);
+      toast.error(error, {
+        position: toast.POSITION.TOP_RIGHT,
+      });
     }
   };
   return (
@@ -45,17 +59,17 @@ function Navbar() {
         <div className="links">
           <span>Doanh Nghiệp</span>
           <span>Khám phá</span>
-          {!currentUser?.isSeller && <span>Tạo công việc của bạn</span>}
-          {currentUser ? (
+          {!user?.isSeller && <span>Tạo công việc của bạn</span>}
+          {user ? (
             <div className="user" onClick={() => setOpen(!open)}>
-              <img src={currentUser.img || "/img/noavatar.jpg"} alt="" />
-              <span>{currentUser?.username}</span>
+              <img src={user.img || "/img/noavatar.jpg"} alt="" />
+              <span>{user?.username}</span>
               {open && (
                 <div className="options">
                   <Link className="link" to="/">
                     Thông tin cá nhân
                   </Link>
-                  {currentUser.isSeller && (
+                  {user.isSeller && (
                     <>
                       <Link className="link" to="/mygigs">
                         Công Việc
@@ -95,7 +109,11 @@ function Navbar() {
           <div className="menu">
             {cards.map((cat) => {
               return (
-                <Link className="link menuLink" to={`/gigs?cat=${cat.title}`}>
+                <Link
+                  className="link menuLink"
+                  to={`/gigs?cat=${cat.title}`}
+                  key={cat.id}
+                >
                   {cat.title}
                 </Link>
               );
@@ -104,6 +122,7 @@ function Navbar() {
           <hr />
         </>
       )}
+      <ToastContainer />
     </div>
   );
 }

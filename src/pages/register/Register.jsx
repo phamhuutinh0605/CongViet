@@ -3,6 +3,7 @@ import upload from "../../utils/upload";
 import "./Register.scss";
 import newRequest from "../../utils/newRequest";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 
 function Register() {
   const [file, setFile] = useState(null);
@@ -39,10 +40,14 @@ function Register() {
     }
     try {
       await newRequest.post("/auth/register", user);
-      localStorage.setItem("currentUser", JSON.stringify(user));
-      navigate("/");
+      navigate("/login");
     } catch (err) {
-      console.log(err);
+     if(err){
+      console.log(err)
+      toast.error(err?.response?.data, {
+        position: toast.POSITION.TOP_RIGHT
+      });
+     }
     }
   };
   return (
@@ -111,6 +116,7 @@ function Register() {
           ></textarea>
         </div>
       </form>
+      <ToastContainer />
     </div>
   );
 }
