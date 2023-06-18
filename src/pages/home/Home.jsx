@@ -63,7 +63,7 @@ function Home() {
             src="https://www.youtube.com/embed/Au6LqK1UH8g?autoplay=1&mute=1&start=5"
             title="YouTube video player"
             frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allow="accelerometer;clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           ></iframe>
         </div>
       </div>

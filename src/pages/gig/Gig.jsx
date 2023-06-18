@@ -30,7 +30,7 @@ function Gig() {
       }),
     enabled: !!userId,
   });
-  console.log(formatDate(dataUser?.createdAt));
+
   return (
     <div className="gig">
       {isLoading ? (
@@ -150,7 +150,7 @@ function Gig() {
             <div className="details">
               <div className="item">
                 <img src="/img/clock.png" alt="" />
-                <span>Giao hàng trong {data?.deliveryDate} ngày</span>
+                <span>Giao hàng trong {data?.deliveryTime} ngày</span>
               </div>
               <div className="item">
                 <img src="/img/recycle.png" alt="" />

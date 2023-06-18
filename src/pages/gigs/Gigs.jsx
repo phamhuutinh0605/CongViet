@@ -38,7 +38,7 @@ function Gigs() {
 
   useEffect(() => {
     refetch();
-  }, [sort]);
+  }, [sort, search]);
 
   return (
     <div className="gigs">

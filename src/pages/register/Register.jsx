@@ -33,21 +33,16 @@ function Register() {
     e.preventDefault();
 
     const url = await upload(file);
-    if (url) {
-      setUser((prev) => {
-        return { ...prev, img: url };
-      });
-    }
     try {
-      await newRequest.post("/auth/register", user);
+      await newRequest.post("/auth/register", { ...user, img: url });
       navigate("/login");
     } catch (err) {
-     if(err){
-      console.log(err)
-      toast.error(err?.response?.data, {
-        position: toast.POSITION.TOP_RIGHT
-      });
-     }
+      if (err) {
+        console.log(err);
+        toast.error(err?.response?.data, {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      }
     }
   };
   return (

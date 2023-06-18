@@ -21,29 +21,37 @@ const Reviews = ({ gigId }) => {
     onSuccess: () => {
       queryClient.invalidateQueries(["reviews"]);
     },
-    onError:(err)=>{
-       return  toast.error(err.response.data, {
-          position: toast.POSITION.TOP_RIGHT
-        });
-       }
+    onError: (err) => {
+      return toast.error(err.response.data, {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    },
   });
 
   const handleSubmit = (e) => {
+    const { user } = JSON.parse(localStorage.getItem("currentUser"));
     e.preventDefault();
     const desc = e.target[0].value;
     const star = e.target[1].value;
-    mutation.mutate({ gigId: gigId, desc: desc, star: star });
-    console.log(desc, star, gigId);
+    mutation.mutate({
+      gigId: gigId,
+      desc: desc,
+      star: star,
+      userId: user?._id,
+    });
+    console.log(desc, star, gigId, user?._id);
   };
 
   return (
     <div className="reviews">
       <h2>Đánh Giá</h2>
-      {isLoading
-        ? "loading"
-        : error
-        ? <ToastContainer />
-        : data.map((review) => <Review key={review._id} review={review} />)}
+      {isLoading ? (
+        "loading"
+      ) : error ? (
+        <ToastContainer />
+      ) : (
+        data.map((review) => <Review key={review._id} review={review} />)
+      )}
       <div className="add">
         <h3>Thêm đánh giá về người này</h3>
         <form action="" className="addForm" onSubmit={handleSubmit}>
