@@ -24,13 +24,14 @@ function Navbar() {
   // const currentUser = null
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
   const user = currentUser?.user;
- useEffect(()=>{
-  if (currentUser?.user) {
-    toast.success("Đăng nhập thành công", {
-      position: toast.POSITION.TOP_RIGHT,
-    });
-  }
- },[])
+
+  useEffect(() => {
+    if (currentUser?.user) {
+      toast.success("Đăng nhập thành công", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
+  }, [currentUser?.user._id]);
   const handleLogout = async () => {
     try {
       localStorage.setItem("currentUser", null);
@@ -72,16 +73,16 @@ function Navbar() {
                   {user.isSeller && (
                     <>
                       <Link className="link" to="/mygigs">
-                        Công Việc
+                        Quản lý công việc của bạn
                       </Link>
                       <Link className="link" to="/add">
-                        Thêm Công Việc mới
+                        Thêm công việc mới
+                      </Link>
+                      <Link className="link" to="/orders">
+                        Đơn hàng
                       </Link>
                     </>
                   )}
-                  <Link className="link" to="/orders">
-                    Đơn hàng
-                  </Link>
                   <Link className="link" to="/messages">
                     Tin nhắn
                   </Link>

@@ -1,7 +1,23 @@
 import React from "react";
 import "./Featured.scss";
-
+import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import { cards } from "../../data.js";
+import { ToastContainer, toast } from "react-toastify";
 function Featured() {
+  const inputRef = useRef("");
+  const navigate = useNavigate();
+  const handleSearch = () => {
+    const searchCat = cards?.filter((cat) =>
+      cat?.title?.toLowerCase().includes(inputRef?.current?.value)
+    );
+    if (!searchCat?.[0]) {
+      toast.error("Không tìm thấy công việc này!", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    }
+    navigate(`/gigs?cat=${searchCat?.[0].title}`);
+  };
   return (
     <div className="featured">
       <div className="container">
@@ -12,9 +28,13 @@ function Featured() {
           <div className="search">
             <div className="searchInput">
               <img src="./img/search.png" alt="" />
-              <input type="text" placeholder='"Tìm những gì bạn muốn "' />
+              <input
+                type="text"
+                placeholder='"Tìm những gì bạn muốn "'
+                ref={inputRef}
+              />
             </div>
-            <button>Tìm kiếm</button>
+            <button onClick={handleSearch}>Tìm kiếm</button>
           </div>
           <div className="popular">
             <span>Phổ biến:</span>
@@ -28,6 +48,7 @@ function Featured() {
           <img src="./img/bando.png" alt="" />
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }

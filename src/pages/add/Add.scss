@@ -20,7 +20,7 @@
 
       label {
         color: gray;
-        font-size: 18px;
+        font-size: 15px;
       }
 
       .info,
@@ -36,14 +36,19 @@
         textarea {
           padding: 20px;
         }
+        input[type="button"],input[type="file"]{
+          cursor: pointer;
+
+        }
 
         button {
           border: none;
-          padding: 20px;
+          padding: 15px;
           color: white;
           font-weight: 500;
-          font-size: 18px;
+          font-size: 15px;
           background-color: #B22234;
+          color: #ffbf00;
           cursor: pointer;
         }
       }
