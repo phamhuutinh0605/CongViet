@@ -44,7 +44,7 @@ function Gig() {
               CôngVIỆT {">"} {data?.title} {">"}
             </span>
             <h1>{data?.title}</h1>
-            {/* {isLoadingUser ? (
+            {isLoadingUser ? (
               "loading"
             ) : errorUser ? (
               "Something went wrong!"
@@ -69,8 +69,8 @@ function Gig() {
                   </div>
                 )}
               </div>
-            )} */}
-            {/* {data?.images?.length < 1 ? (
+            )}
+            {data?.images?.length < 1 ? (
               "Không có ảnh mô tả!"
             ) : (
               <Slider slidesToShow={1} arrowsScroll={1} className="slider">
@@ -78,7 +78,7 @@ function Gig() {
                   <img key={img} src={img} alt="" />
                 ))}
               </Slider>
-            )} */}
+            )}
             <h2>Về Công Việc</h2>
             <p>{data?.desc}</p>
             {isLoadingUser ? (

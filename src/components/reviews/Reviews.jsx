@@ -19,10 +19,11 @@ const Reviews = ({ gigId }) => {
       return await newRequest.post("/reviews", review);
     },
     onSuccess: () => {
+      //reload lại khi có thay đổi data liên quan đến key reviews
       queryClient.invalidateQueries(["reviews"]);
     },
     onError: (err) => {
-      return toast.error(err.response.data, {
+      return toast.info(err.response.data, {
         position: toast.POSITION.TOP_RIGHT,
       });
     },

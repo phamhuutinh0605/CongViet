@@ -8,13 +8,20 @@ function Featured() {
   const inputRef = useRef("");
   const navigate = useNavigate();
   const handleSearch = () => {
+    if (!inputRef?.current?.value) {
+      toast.warning("Bạn chưa nhập tên công việc cần tìm!", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+      return;
+    }
     const searchCat = cards?.filter((cat) =>
       cat?.title?.toLowerCase().includes(inputRef?.current?.value)
     );
     if (!searchCat?.[0]) {
-      toast.error("Không tìm thấy công việc này!", {
+      toast.warning("Không tìm thấy công việc này!", {
         position: toast.POSITION.TOP_CENTER,
       });
+      return;
     }
     navigate(`/gigs?cat=${searchCat?.[0].title}`);
   };
