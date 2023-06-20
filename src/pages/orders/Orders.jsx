@@ -27,7 +27,7 @@ const Orders = () => {
     } catch (err) {
       if (err.response.status === 404) {
         const res = await newRequest.post(`/conversations/`, {
-          to: currentUser.seller ? buyerId : sellerId,
+          to: currentUser.isSeller ? buyerId : sellerId,
         });
         navigate(`/message/${res.data.id}`);
       }
@@ -42,16 +42,16 @@ const Orders = () => {
       ) : (
         <div className="container">
           <div className="title">
-            <h1>Orders</h1>
+            <h1>Đơn hàng</h1>
           </div>
           <table>
             <tr>
-              <th>Image</th>
-              <th>Title</th>
-              <th>Price</th>
-              <th>Contact</th>
+              <th>Hình ảnh</th>
+              <th>Tiêu đề</th>
+              <th>Giá</th>
+              <th>Liên hệ</th>
             </tr>
-            {data.map((order) => (
+            {data?.map((order) => (
               <tr key={order._id}>
                 <td>
                   <img className="image" src={order.img} alt="" />

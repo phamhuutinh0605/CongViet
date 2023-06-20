@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import "./Login.scss";
 import { useNavigate } from "react-router-dom";
 import newRequest from "../../utils/newRequest";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Login() {
-  
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -19,11 +18,11 @@ function Login() {
       localStorage.setItem("currentUser", JSON.stringify(res.data));
       navigate("/");
     } catch (err) {
-       if(err){
-        toast.error(err.response.data, {
-          position: toast.POSITION.TOP_RIGHT
+      if (err) {
+        toast.error(err?.response?.data, {
+          position: toast.POSITION.TOP_RIGHT,
         });
-       }
+      }
     }
   };
   return (

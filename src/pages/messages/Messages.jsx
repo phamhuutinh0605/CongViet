@@ -68,11 +68,13 @@ const Messages = () => {
                 </td>
                 <td>{moment(c.updatedAt).fromNow()}</td>
                 <td>
-                  {((currentUser.isSeller && !c.readBySeller) ||
-                    (!currentUser.isSeller && !c.readByBuyer)) && (
+                  {(currentUser.isSeller && !c.readBySeller) ||
+                  (!currentUser.isSeller && !c.readByBuyer) ? (
                     <button onClick={() => handleRead(c.id)}>
                       Nhấn để đọc
                     </button>
+                  ) : (
+                    <i>Đã xem</i>
                   )}
                 </td>
               </tr>

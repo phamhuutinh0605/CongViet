@@ -14,10 +14,11 @@ import Messages from "./pages/messages/Messages";
 import Message from "./pages/message/Message";
 import MyGigs from "./pages/myGigs/MyGigs";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import Pay from "./pages/pay/Pay";
 import Success from "./pages/success/Success";
 import PageNotFound from "./pages/notfound/PageNotFound";
-import MoMoPayment from "./components/momoPay/MomoPay";
+import { loadStripe } from "@stripe/stripe-js";
+import Checkout from "./components/checkout/Checkout";
+
 function App() {
   const queryClient = new QueryClient();
 
@@ -79,12 +80,8 @@ function App() {
           element: <Login />,
         },
         {
-          path: "/momopay",
-          element: <MoMoPayment />,
-        },
-        {
-          path: "/pay/:id",
-          element: <Pay />,
+          path: "/pay",
+          element: <Checkout />,
         },
         {
           path: "/success",

@@ -2,7 +2,7 @@ import React from "react";
 import "./Gig.scss";
 import { Slider } from "infinite-react-carousel/lib";
 import { useQuery } from "@tanstack/react-query";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import newRequest from "../../utils/newRequest";
 import Reviews from "../../components/reviews/Reviews";
 import { formatDate } from "../../utils/formatDate";
@@ -31,6 +31,8 @@ function Gig() {
     enabled: !!userId,
   });
 
+  const navigate = useNavigate();
+  const handleContact = () => {};
   return (
     <div className="gig">
       {isLoading ? (
@@ -104,7 +106,7 @@ function Gig() {
                         </span>
                       </div>
                     )}
-                    <button>Liên Hệ Với Tôi</button>
+                    <button onClick={handleContact}>Liên Hệ Với Tôi</button>
                   </div>
                 </div>
                 <div className="box">
@@ -165,7 +167,7 @@ function Gig() {
                 </div>
               ))}
             </div>
-            <Link to={`/pay/${id}`}>
+            <Link to={`/pay`}>
               <button>Tiếp Tục</button>
             </Link>
           </div>
