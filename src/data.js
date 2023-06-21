@@ -25,7 +25,7 @@ export const cards = [
   },
   {
     id: 5,
-    title: "Video Giới thiệu",
+    title: "Video Giới Thiệu",
     desc: "Tương tác với khán giả của bạn",
     img: "https://images.pexels.com/photos/13388047/pexels-photo-13388047.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
   },

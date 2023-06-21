@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "./Orders.scss";
 import { useQuery } from "@tanstack/react-query";
 import newRequest from "../../utils/newRequest";
+import LoadingPage from "../loading/LoadingPage";
 
 const Orders = () => {
   const currentUser = JSON.parse(localStorage.getItem("currentUser")).user;
@@ -36,7 +37,7 @@ const Orders = () => {
   return (
     <div className="orders">
       {isLoading ? (
-        "Loading..."
+        <LoadingPage />
       ) : error ? (
         "Error"
       ) : (
@@ -51,23 +52,25 @@ const Orders = () => {
               <th>Giá</th>
               <th>Liên hệ</th>
             </tr>
-            {data?.map((order) => (
-              <tr key={order._id}>
-                <td>
-                  <img className="image" src={order.img} alt="" />
-                </td>
-                <td>{order.title}</td>
-                <td>{order.price}</td>
-                <td>
-                  <img
-                    className="message"
-                    src="./img/message.png"
-                    alt=""
-                    onClick={() => handleContact(order)}
-                  />
-                </td>
-              </tr>
-            ))}
+            {data.length < 1
+              ? "Bạn chưa có đơn hàng nào!"
+              : data?.map((order) => (
+                  <tr key={order._id}>
+                    <td>
+                      <img className="image" src={order.img} alt="" />
+                    </td>
+                    <td>{order.title}</td>
+                    <td>{order.price}</td>
+                    <td>
+                      <img
+                        className="message"
+                        src="./img/message.png"
+                        alt=""
+                        onClick={() => handleContact(order)}
+                      />
+                    </td>
+                  </tr>
+                ))}
           </table>
         </div>
       )}

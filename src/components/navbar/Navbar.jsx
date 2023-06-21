@@ -4,6 +4,15 @@ import "./Navbar.scss";
 import newRequest from "../../utils/newRequest";
 import { cards } from "../../data.js";
 import { ToastContainer, toast } from "react-toastify";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faBriefcase,
+  faFileCirclePlus,
+  faRightFromBracket,
+  faSackDollar,
+  faUserTie,
+} from "@fortawesome/free-solid-svg-icons";
+import { faMessage } from "@fortawesome/free-regular-svg-icons";
 function Navbar() {
   const [active, setActive] = useState(false);
   const [open, setOpen] = useState(false);
@@ -68,26 +77,32 @@ function Navbar() {
               {open && (
                 <div className="options">
                   <Link className="link" to="/">
-                    Thông tin cá nhân
+                    <FontAwesomeIcon icon={faUserTie} />
+                    {""} Thông tin cá nhân
                   </Link>
                   {user.isSeller && (
                     <>
                       <Link className="link" to="/mygigs">
-                        Quản lý công việc của bạn
+                        <FontAwesomeIcon icon={faBriefcase} />
+                        {""} Công việc của bạn
                       </Link>
                       <Link className="link" to="/add">
-                        Thêm công việc mới
+                        <FontAwesomeIcon icon={faFileCirclePlus} />
+                        {""} Thêm công việc mới
                       </Link>
                       <Link className="link" to="/orders">
-                        Đơn hàng
+                        <FontAwesomeIcon icon={faSackDollar} />
+                        {""} Đơn hàng
                       </Link>
                     </>
                   )}
                   <Link className="link" to="/messages">
-                    Tin nhắn
+                    <FontAwesomeIcon icon={faMessage} />
+                    {""} Tin nhắn
                   </Link>
                   <Link className="link" to="/" onClick={handleLogout}>
-                    Đăng xuất
+                    <FontAwesomeIcon icon={faRightFromBracket} />
+                    {""} Đăng xuất
                   </Link>
                 </div>
               )}

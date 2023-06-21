@@ -16,7 +16,6 @@ import MyGigs from "./pages/myGigs/MyGigs";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Success from "./pages/success/Success";
 import PageNotFound from "./pages/notfound/PageNotFound";
-import { loadStripe } from "@stripe/stripe-js";
 import Checkout from "./components/checkout/Checkout";
 
 function App() {

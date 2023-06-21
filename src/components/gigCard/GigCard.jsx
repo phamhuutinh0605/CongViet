@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { formatPrice } from "../../utils/formatPrice";
 import { useQuery } from "@tanstack/react-query";
 import newRequest from "../../utils/newRequest";
+import LoadingPage from "../../pages/loading/LoadingPage";
 
 const GigCard = ({ item }) => {
   const { data, isLoading, error } = useQuery({
@@ -15,10 +16,10 @@ const GigCard = ({ item }) => {
   return (
     <Link to={`/gig/${item._id}`} className="link">
       <div className="gigCard">
-        <img src={item.img} alt="" />
+        <img src={item.img || item.cover} alt="" />
         <div className="info">
           {isLoading ? (
-            "Loading..."
+            <LoadingPage />
           ) : error ? (
             "Something went wrong!"
           ) : (

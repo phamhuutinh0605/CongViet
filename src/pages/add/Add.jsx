@@ -100,16 +100,18 @@ const Add = () => {
                 );
               })}
             </select>
-            <label htmlFor="">Cover Image</label>
+            <label htmlFor="">Ảnh công việc</label>
             <input
               type="file"
               onChange={(e) => setSingleFile(e.target.files[0])}
+              required
             />
             <label htmlFor="">Cập nhật ảnh</label>
             <input
               type="file"
               multiple
               onChange={(e) => setFiles(e.target.files)}
+              required
             />
             <button onClick={handleUpload}>
               {uploading ? "Đang cập nhật..." : "Cập nhật ảnh"}
@@ -150,23 +152,27 @@ const Add = () => {
               name="revisionNumber"
               onChange={handleChange}
             />
-            <label htmlFor="">Thêm tính năng</label>
+            <label htmlFor="">Thêm điểm nổi bật của bạn</label>
             <form action="" className="add" onSubmit={handleFeature}>
-              <input type="text" placeholder="Ví dụ: thiết kế..." />
+              <input
+                type="text"
+                placeholder="Ví dụ: thiết kế giá rẻ..."
+                required
+              />
               <button type="submit">Thêm</button>
             </form>
-            <div className="addedFeatures">
+            <div className="addedFeatures" style={{ marginLeft: "30%" }}>
               {state?.features?.map((f) => (
-                <div className="item" key={f}>
+                <li className="item" key={f} style={{ marginBottom: "10px" }}>
+                  {f}
                   <button
                     onClick={() =>
                       dispatch({ type: "REMOVE_FEATURE", payload: f })
                     }
                   >
-                    {f}
-                    <span>X</span>
+                    X
                   </button>
-                </div>
+                </li>
               ))}
             </div>
             <label htmlFor="">Giá</label>

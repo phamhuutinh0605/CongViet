@@ -3,6 +3,7 @@ import React from "react";
 import { Link, useParams } from "react-router-dom";
 import newRequest from "../../utils/newRequest";
 import "./Message.scss";
+import LoadingPage from "../loading/LoadingPage";
 
 const Message = () => {
   const { id } = useParams();
@@ -42,7 +43,7 @@ const Message = () => {
           <Link to="/messages">Tin nhắn</Link> {">"} John Doe {">"}
         </span>
         {isLoading ? (
-          "Loading..."
+          <LoadingPage />
         ) : error ? (
           "Error"
         ) : (

@@ -4,6 +4,7 @@ import GigCard from "../../components/gigCard/GigCard";
 import { useQuery } from "@tanstack/react-query";
 import newRequest from "../../utils/newRequest";
 import { useLocation } from "react-router-dom";
+import LoadingPage from "../loading/LoadingPage";
 
 function Gigs() {
   const [sort, setSort] = useState("sales");
@@ -74,11 +75,13 @@ function Gigs() {
           </div>
         </div>
         <div className="cards">
-          {isLoading
-            ? "Loading..."
-            : error
-            ? "Error Page"
-            : data?.map((gig) => <GigCard key={gig._id} item={gig} />)}
+          {isLoading ? (
+            <LoadingPage />
+          ) : error ? (
+            "Error Page"
+          ) : (
+            data?.map((gig) => <GigCard key={gig._id} item={gig} />)
+          )}
           {data?.length < 1 && <span>Không tìm thấy công việc nào!</span>}
         </div>
       </div>

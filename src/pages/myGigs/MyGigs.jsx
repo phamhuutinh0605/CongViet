@@ -1,140 +1,82 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./MyGigs.scss";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import newRequest from "../../utils/newRequest";
+import { formatDate } from "../../utils/formatDate";
 
 function MyGigs() {
-  const currentUser = {
-    id: 1,
-    username: "Anna",
-    isSeller: true,
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"))?.user;
+
+  const queryClient = useQueryClient();
+
+  const { isLoading, error, data } = useQuery({
+    queryKey: [currentUser._id],
+    queryFn: () =>
+      newRequest.get(`/gigs?userId=${currentUser._id}`).then((res) => {
+        return res.data;
+      }),
+  });
+
+  const mutation = useMutation({
+    mutationFn: (id) => {
+      return newRequest.delete(`/gigs/${id}`);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(["myGigs"]);
+    },
+  });
+
+  const handleDelete = (id) => {
+    mutation.mutate(id);
   };
 
   return (
     <div className="myGigs">
-      <div className="container">
-        <div className="title">
-          <h1>{currentUser.isSeller ? "Gigs" : "Đơn hàng"}</h1>
-          {currentUser.isSeller && (
-            <Link to="/add">
-              <button>Thêm Gig mới</button>
-            </Link>
-          )}
+      {isLoading ? (
+        "loading"
+      ) : error ? (
+        "error"
+      ) : (
+        <div className="container">
+          <div className="title">
+            <h1>Những công việc của bạn</h1>
+            {currentUser.isSeller && (
+              <Link to="/add">
+                <button>Thêm công việc mới</button>
+              </Link>
+            )}
+          </div>
+          <table>
+            <tr>
+              <th>Ảnh</th>
+              <th>Tiêu đề</th>
+              <th>Giá</th>
+              <th>Ngày tạo</th>
+              <th>Hành động</th>
+            </tr>
+            {data.map((gig) => (
+              <tr key={gig._id}>
+                <td>
+                  <img className="image" src={gig.cover} alt="" />
+                </td>
+                <td>{gig.title}</td>
+                <td>{gig.price}</td>
+                <td>{formatDate(gig.createdAt)}</td>
+                <td>
+                  <img
+                    className="delete"
+                    src="./img/delete.png"
+                    alt=""
+                    onClick={() => handleDelete(gig._id)}
+                    style={{ marginLeft: "30px" }}
+                  />
+                </td>
+              </tr>
+            ))}
+          </table>
         </div>
-        <table>
-          <tr>
-            <th>Ảnh</th>
-            <th>Tiêu đề</th>
-            <th>Giá</th>
-            <th>Doanh số</th>
-            <th>Hành động</th>
-          </tr>
-          <tr>
-            <td>
-              <img
-                className="image"
-                src="https://images.pexels.com/photos/270408/pexels-photo-270408.jpeg?auto=compress&cs=tinysrgb&w=1600"
-                alt=""
-              />
-            </td>
-            <td>Bức tranh khái niệm tuyệt vời</td>
-            <td>
-              59.<sup>99</sup>
-            </td>
-            <td>13</td>
-            <td>
-              <img className="delete" src="./img/delete.png" alt="" />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <img
-                className="image"
-                src="https://images.pexels.com/photos/270408/pexels-photo-270408.jpeg?auto=compress&cs=tinysrgb&w=1600"
-                alt=""
-              />
-            </td>
-            <td>Bức tranh khái niệm được tạo bởi trí tuệ nhân tạo</td>
-            <td>
-              120.<sup>99</sup>
-            </td>
-            <td>41</td>
-            <td>
-              <img className="delete" src="./img/delete.png" alt="" />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <img
-                className="image"
-                src="https://images.pexels.com/photos/270408/pexels-photo-270408.jpeg?auto=compress&cs=tinysrgb&w=1600"
-                alt=""
-              />
-            </td>
-            <td>Bức tranh kỹ thuật số chất lượng cao</td>
-            <td>
-              79.<sup>99</sup>
-            </td>
-            <td>55</td>
-            <td>
-              <img className="delete" src="./img/delete.png" alt="" />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <img
-                className="image"
-                src="https://images.pexels.com/photos/270408/pexels-photo-270408.jpeg?auto=compress&cs=tinysrgb&w=1600"
-                alt=""
-              />
-            </td>
-            <td>Bức tranh minh họa siêu thực</td>
-            <td>
-              119.<sup>99</sup>
-            </td>
-            <td>29</td>
-            <td>
-              <img className="delete" src="./img/delete.png" alt="" />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <img
-                className="image"
-                src="https://images.pexels.com/photos/270408/pexels-photo-270408.jpeg?auto=compress&cs=tinysrgb&w=1600"
-                alt=""
-              />
-            </td>
-            <td>Bức tranh kỹ thuật số được tạo bởi trí tuệ nhân tạo</td>
-            <td>
-              59.<sup>99</sup>
-            </td>
-            <td>34</td>
-            <td>
-              <img className="delete" src="./img/delete.png" alt="" />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <img
-                className="image"
-                src="https://images.pexels.com/photos/270408/pexels-photo-270408.jpeg?auto=compress&cs=tinysrgb&w=1600"
-                alt=""
-              />
-            </td>
-            <td>
-              Bức tranh kỹ thuật số dựa trên văn bản được tạo bởi trí tuệ nhân
-              tạo
-            </td>
-            <td>
-              110.<sup>99</sup>
-            </td>
-            <td>16</td>
-            <td>
-              <img className="delete" src="./img/delete.png" alt="" />
-            </td>
-          </tr>
-        </table>
-      </div>
+      )}
     </div>
   );
 }
