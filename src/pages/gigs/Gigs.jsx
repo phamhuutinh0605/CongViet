@@ -12,13 +12,15 @@ function Gigs() {
   const minRef = useRef();
   const maxRef = useRef();
   const { search } = useLocation();
+  const token = JSON.parse(localStorage.getItem("currentUser"))?.token;
+
   const { data, isLoading, error, refetch } = useQuery({
     queryKey: ["gigs"],
     queryFn: async () => {
       return await newRequest(
         `/gigs${decodeURIComponent(search)}&min=${minRef.current.value}&max=${
           maxRef.current.value
-        }&sort=${sort}`
+        }&sort=${sort}&accessToken=${token}`
       ).then((res) => res.data);
     },
   });

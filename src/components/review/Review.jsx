@@ -3,12 +3,16 @@ import React from "react";
 import newRequest from "../../utils/newRequest";
 import "./Review.scss";
 const Review = ({ review }) => {
+  const token = JSON.parse(localStorage.getItem("currentUser"))?.token;
+
   const { isLoading, error, data } = useQuery({
     queryKey: [review.userId],
     queryFn: () =>
-      newRequest.get(`/users/${review.userId}`).then((res) => {
-        return res.data;
-      }),
+      newRequest
+        .get(`/users/${review.userId}?accessToken=${token}`)
+        .then((res) => {
+          return res.data;
+        }),
   });
 
   return (

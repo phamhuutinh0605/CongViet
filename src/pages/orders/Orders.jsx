@@ -7,12 +7,13 @@ import LoadingPage from "../loading/LoadingPage";
 
 const Orders = () => {
   const currentUser = JSON.parse(localStorage.getItem("currentUser")).user;
+  const token = JSON.parse(localStorage.getItem("currentUser")).token;
 
   const navigate = useNavigate();
   const { isLoading, error, data } = useQuery({
     queryKey: ["orders"],
     queryFn: () =>
-      newRequest.get(`/orders`).then((res) => {
+      newRequest.get(`/orders?accessToken=${token}`).then((res) => {
         return res.data;
       }),
   });
@@ -23,13 +24,18 @@ const Orders = () => {
     const id = sellerId + buyerId;
 
     try {
-      const res = await newRequest.get(`/conversations/single/${id}`);
+      const res = await newRequest.get(
+        `/conversations/single/${id}?accessToken=${token}`
+      );
       navigate(`/message/${res.data.id}`);
     } catch (err) {
       if (err.response.status === 404) {
-        const res = await newRequest.post(`/conversations/`, {
-          to: currentUser.isSeller ? buyerId : sellerId,
-        });
+        const res = await newRequest.post(
+          `/conversations?accessToken=${token}`,
+          {
+            to: currentUser.isSeller ? buyerId : sellerId,
+          }
+        );
         navigate(`/message/${res.data.id}`);
       }
     }

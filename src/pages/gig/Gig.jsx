@@ -10,10 +10,11 @@ import { formatDate } from "../../utils/formatDate";
 function Gig() {
   const { id } = useParams();
 
+  const token = JSON.parse(localStorage.getItem("currentUser"))?.token;
   const { isLoading, error, data } = useQuery({
     queryKey: ["gig"],
     queryFn: () =>
-      newRequest.get(`/gigs/${id}`).then((res) => {
+      newRequest.get(`/gigs/${id}?accessToken=${token}`).then((res) => {
         return res.data;
       }),
   });
@@ -25,7 +26,7 @@ function Gig() {
   } = useQuery({
     queryKey: ["user"],
     queryFn: () =>
-      newRequest.get(`/users/${userId}`).then((res) => {
+      newRequest.get(`/users/${userId}?accessToken=${token}`).then((res) => {
         return res.data;
       }),
     enabled: !!userId,

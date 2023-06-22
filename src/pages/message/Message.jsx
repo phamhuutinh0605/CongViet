@@ -8,20 +8,21 @@ import LoadingPage from "../loading/LoadingPage";
 const Message = () => {
   const { id } = useParams();
   const currentUser = JSON.parse(localStorage.getItem("currentUser")).user;
+  const token = JSON.parse(localStorage.getItem("currentUser")).token;
 
   const queryClient = useQueryClient();
 
   const { isLoading, error, data } = useQuery({
     queryKey: ["messages"],
     queryFn: () =>
-      newRequest.get(`/messages/${id}`).then((res) => {
+      newRequest.get(`/messages/${id}?accessToken=${token}`).then((res) => {
         return res.data;
       }),
   });
 
   const mutation = useMutation({
     mutationFn: (message) => {
-      return newRequest.post(`/messages`, message);
+      return newRequest.post(`/messages?accessToken=${token}`, message);
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["messages"]);

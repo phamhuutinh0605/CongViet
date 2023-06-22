@@ -7,15 +7,18 @@ import { formatDate } from "../../utils/formatDate";
 
 function MyGigs() {
   const currentUser = JSON.parse(localStorage.getItem("currentUser"))?.user;
+  const token = JSON.parse(localStorage.getItem("currentUser"))?.token;
 
   const queryClient = useQueryClient();
 
   const { isLoading, error, data } = useQuery({
     queryKey: [currentUser._id],
     queryFn: () =>
-      newRequest.get(`/gigs?userId=${currentUser._id}`).then((res) => {
-        return res.data;
-      }),
+      newRequest
+        .get(`/gigs?userId=${currentUser._id}&accessToken=${token}`)
+        .then((res) => {
+          return res.data;
+        }),
   });
 
   const mutation = useMutation({

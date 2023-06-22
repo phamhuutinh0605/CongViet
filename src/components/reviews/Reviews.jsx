@@ -6,17 +6,19 @@ import "./Reviews.scss";
 import { ToastContainer, toast } from "react-toastify";
 const Reviews = ({ gigId }) => {
   const queryClient = useQueryClient();
+  const token = JSON.parse(localStorage.getItem("currentUser"))?.token;
+
   const { isLoading, error, data } = useQuery({
     queryKey: ["reviews"],
     queryFn: () =>
-      newRequest.get(`/reviews/${gigId}`).then((res) => {
+      newRequest.get(`/reviews/${gigId}?accessToken=${token}`).then((res) => {
         return res.data;
       }),
   });
 
   const mutation = useMutation({
     mutationFn: async (review) => {
-      return await newRequest.post("/reviews", review);
+      return await newRequest.post(`/reviews?accessToken=${token}`, review);
     },
     onSuccess: () => {
       //reload lại khi có thay đổi data liên quan đến key reviews

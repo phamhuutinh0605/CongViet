@@ -54,10 +54,11 @@ const Add = () => {
   const navigate = useNavigate();
 
   const queryClient = useQueryClient();
+  const token = JSON.parse(localStorage.getItem("currentUser"))?.token;
 
   const mutation = useMutation({
     mutationFn: (gig) => {
-      return newRequest.post("/gigs", gig);
+      return newRequest.post(`/gigs?accessToken=${token}`, gig);
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["myGigs"]),

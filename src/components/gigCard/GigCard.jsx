@@ -7,10 +7,13 @@ import newRequest from "../../utils/newRequest";
 import LoadingPage from "../../pages/loading/LoadingPage";
 
 const GigCard = ({ item }) => {
+  const token = JSON.parse(localStorage.getItem("currentUser"))?.token;
   const { data, isLoading, error } = useQuery({
     queryKey: [item.userId],
     queryFn: async () => {
-      return newRequest.get(`/users/${item.userId}`).then((res) => res.data);
+      return newRequest
+        .get(`/users/${item.userId}?accessToken=${token}`)
+        .then((res) => res.data);
     },
   });
   return (

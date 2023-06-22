@@ -6,6 +6,7 @@ import newRequest from "../../utils/newRequest";
 import "./Pay.css";
 function PaymentForm() {
   const user = JSON.parse(localStorage.getItem("currentUser"))?.user;
+  const token = JSON.parse(localStorage.getItem("currentUser"))?.token;
   const [formPay, setFormPay] = useState({
     username: "",
     userId: user?._id,
@@ -22,7 +23,7 @@ function PaymentForm() {
   };
   const mutation = useMutation({
     mutationFn: (pay) => {
-      return newRequest.post("/payments", pay);
+      return newRequest.post(`/payments?accessToken=${token}`, pay);
     },
     onSuccess: () => {
       toast.success("Thêm phương thức thanh toán thành công", {

@@ -7,11 +7,14 @@ const Success = () => {
   const navigate = useNavigate();
   const params = new URLSearchParams(search);
   const payment_intent = params.get("payment_intent");
+  const token = JSON.parse(localStorage.getItem("currentUser"))?.token;
 
   useEffect(() => {
     const makeRequest = async () => {
       try {
-        await newRequest.put("/orders", { payment_intent });
+        await newRequest.put(`/orders?accessToken=${token}`, {
+          payment_intent,
+        });
         setTimeout(() => {
           navigate("/orders");
         }, 5000);

@@ -11,11 +11,12 @@ const Messages = () => {
   const currentUser = JSON.parse(localStorage.getItem("currentUser")).user;
 
   const queryClient = useQueryClient();
+  const token = JSON.parse(localStorage.getItem("currentUser"))?.token;
 
   const { isLoading, error, data } = useQuery({
     queryKey: ["conversations"],
     queryFn: () =>
-      newRequest.get(`/conversations`).then((res) => {
+      newRequest.get(`/conversations?accessToken=${token}`).then((res) => {
         return res.data;
       }),
   });
