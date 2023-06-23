@@ -76,7 +76,7 @@ function Navbar() {
               <span>{user?.username}</span>
               {open && (
                 <div className="options">
-                  <Link className="link" to="/">
+                  <Link className="link" to="/userprofile">
                     <FontAwesomeIcon icon={faUserTie} />
                     {""} Thông tin cá nhân
                   </Link>
