@@ -9,7 +9,7 @@ const UserProfile = () => {
   const token = JSON.parse(localStorage.getItem("currentUser"))?.token;
   const [formData, setFormData] = useState({
     username: currentUser?.username,
-    avatar: currentUser?.img,
+    img: currentUser?.img,
     email: currentUser?.email,
     phone: currentUser?.phone,
     country: currentUser?.country,
@@ -31,12 +31,10 @@ const UserProfile = () => {
   const handleChangeAvatar = async (e) => {
     e.preventDefault();
     const url = await upload(e.target.files[0]);
-    if (url) {
-      setFormData((prev) => ({
-        ...prev,
-        avatar: url,
-      }));
-    }
+    setFormData((prev) => ({
+      ...prev,
+      img: url,
+    }));
     setIsEditing(!isEditing);
     console.log(url);
   };
