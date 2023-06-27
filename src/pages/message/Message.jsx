@@ -65,8 +65,9 @@ const Message = () => {
         )}
         <hr />
         <form className="write" onSubmit={handleSubmit}>
-          <textarea type="text" placeholder="write a message" />
+          <textarea type="text" placeholder="Viết nội dung tin nhắn..." />
           <button type="submit">Gửi</button>
+          <Link to={"https://videochat-congviet.netlify.app/"}>Gọi Video</Link>
         </form>
       </div>
     </div>

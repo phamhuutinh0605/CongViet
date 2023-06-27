@@ -75,13 +75,23 @@
 
       button{
         background-color: #B22234;
+        color: #ffbf00;
         padding: 20px;
-        color: white;
         font-weight: 500;
         border: none;
         border-radius: 10px;
         cursor: pointer;
         width: 100px;
+      }
+      a{
+        background-color: #ffbf00;
+        text-decoration: none;
+        padding: 20px;
+        color: #B22234;
+        font-weight: 500;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
       }
     }
   }
