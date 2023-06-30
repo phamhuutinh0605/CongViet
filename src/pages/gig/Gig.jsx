@@ -168,7 +168,7 @@ function Gig() {
                 </div>
               ))}
             </div>
-            <Link to={`/pay`}>
+            <Link to={`/pay/${id}`}>
               <button>Tiếp Tục</button>
             </Link>
           </div>

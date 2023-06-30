@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import newRequest from "../../utils/newRequest";
 import "./Messages.scss";
 import moment from "moment";
@@ -8,21 +8,34 @@ import { useState } from "react";
 import { useEffect } from "react";
 
 const Messages = () => {
-  const currentUser = JSON.parse(localStorage.getItem("currentUser")).user;
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"))?.user;
 
   const queryClient = useQueryClient();
   const token = JSON.parse(localStorage.getItem("currentUser"))?.token;
 
-  const { isLoading, error, data } = useQuery({
+  const { isLoading, error, data, refetch } = useQuery({
     queryKey: ["conversations"],
     queryFn: () =>
       newRequest.get(`/conversations?accessToken=${token}`).then((res) => {
         return res.data;
       }),
   });
+  const mutation = useMutation({
+    mutationFn: (id) => {
+      return newRequest.put(`/conversations/${id}?accessToken=${token}`);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(["conversations"]);
+    },
+  });
+  const navigate = useNavigate();
   const handleRead = (id) => {
     mutation.mutate(id);
+    navigate(`/message/${id}`);
   };
+  useEffect(() => {
+    refetch();
+  }, [data]);
   // const [users, setUsers] = useState();
   // useEffect(() => {
   //   async function fetchData() {

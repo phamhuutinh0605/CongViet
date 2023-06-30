@@ -7,8 +7,8 @@ import LoadingPage from "../loading/LoadingPage";
 
 const Message = () => {
   const { id } = useParams();
-  const currentUser = JSON.parse(localStorage.getItem("currentUser")).user;
-  const token = JSON.parse(localStorage.getItem("currentUser")).token;
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"))?.user;
+  const token = JSON.parse(localStorage.getItem("currentUser"))?.token;
 
   const queryClient = useQueryClient();
 

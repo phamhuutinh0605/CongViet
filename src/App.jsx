@@ -18,6 +18,7 @@ import Success from "./pages/success/Success";
 import PageNotFound from "./pages/notfound/PageNotFound";
 import Checkout from "./components/checkout/Checkout";
 import UserProfile from "./pages/userprofile/UserProfile";
+import Pay from "./pages/pay/Pay";
 
 function App() {
   const queryClient = new QueryClient();
@@ -80,8 +81,8 @@ function App() {
           element: <Login />,
         },
         {
-          path: "/pay",
-          element: <Checkout />,
+          path: "/pay/:id",
+          element: <Pay />,
         },
         {
           path: "/success",
