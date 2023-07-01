@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import newRequest from "../../utils/newRequest";
-
+import "./Success.scss";
 const Success = () => {
   const { search } = useLocation();
   const navigate = useNavigate();
@@ -16,8 +16,8 @@ const Success = () => {
           payment_intent,
         });
         setTimeout(() => {
-          navigate("/orders");
-        }, 5000);
+          navigate("/");
+        }, 3000);
       } catch (err) {
         console.log(err);
       }
@@ -27,9 +27,23 @@ const Success = () => {
   }, []);
 
   return (
-    <div>
-      Payment successful. You are being redirected to the orders page. Please do
-      not close the page
+    <div className="success">
+      <div className="card">
+        <div
+          style={{
+            borderRadius: 200,
+            height: 200,
+            width: 200,
+            background: "#F8FAF5",
+            margin: "0 auto",
+          }}
+          className="circle"
+        >
+          <i className="checkmark">✓</i>
+        </div>
+        <h1>Thanh Toán Thành Công</h1>
+        <p>Cảm ơn vì đã lựa chọn chúng tôi!</p>
+      </div>
     </div>
   );
 };

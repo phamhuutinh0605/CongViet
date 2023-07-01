@@ -6,8 +6,8 @@ import newRequest from "../../utils/newRequest";
 import LoadingPage from "../loading/LoadingPage";
 
 const Orders = () => {
-  const currentUser = JSON.parse(localStorage.getItem("currentUser")).user;
-  const token = JSON.parse(localStorage.getItem("currentUser")).token;
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"))?.user;
+  const token = JSON.parse(localStorage.getItem("currentUser"))?.token;
 
   const navigate = useNavigate();
   const { isLoading, error, data } = useQuery({

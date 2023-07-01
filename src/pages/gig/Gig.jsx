@@ -9,7 +9,7 @@ import { formatDate } from "../../utils/formatDate";
 
 function Gig() {
   const { id } = useParams();
-
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"))?.user;
   const token = JSON.parse(localStorage.getItem("currentUser"))?.token;
   const { isLoading, error, data } = useQuery({
     queryKey: ["gig"],
@@ -33,7 +33,19 @@ function Gig() {
   });
 
   const navigate = useNavigate();
-  const handleContact = () => {};
+
+  const handleContact = async () => {
+    const sellerId = userId;
+    const buyerId = currentUser?._id;
+    const id = sellerId + buyerId;
+
+    try {
+      const res = await newRequest.post(`/conversations?accessToken=${token}`, {
+        to: currentUser.isSeller ? buyerId : sellerId,
+      });
+      navigate(`/message/${res.data.id}`);
+    } catch (err) {}
+  };
   return (
     <div className="gig">
       {isLoading ? (
@@ -169,7 +181,7 @@ function Gig() {
               ))}
             </div>
             <Link to={`/pay/${id}`}>
-              <button>Tiếp Tục</button>
+              <button>Chốt đơn ngay</button>
             </Link>
           </div>
         </div>
