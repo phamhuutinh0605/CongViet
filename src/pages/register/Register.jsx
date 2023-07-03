@@ -77,7 +77,7 @@ function Register() {
           <input
             name="country"
             type="text"
-            placeholder="Đường số A, phường B, quận C, thành phố D..."
+            placeholder="Đường số 1A, phường 2B, quận 3C, thành phố 4D..."
             onChange={handleChange}
             required
             minLength={20}
