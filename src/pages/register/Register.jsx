@@ -71,7 +71,7 @@ function Register() {
           />
           <label htmlFor="">Mật khẩu *</label>
           <input name="password" type="password" onChange={handleChange} />
-          <label htmlFor="">Ảnh mô tả công việc</label>
+          <label htmlFor="">Ảnh đại diện</label>
           <input type="file" onChange={(e) => setFile(e.target.files[0])} />
           <label htmlFor="">Địa chỉ *</label>
           <input
