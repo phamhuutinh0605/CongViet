@@ -4,9 +4,10 @@ import newRequest from "../../utils/newRequest";
 import Review from "../review/Review";
 import "./Reviews.scss";
 import { ToastContainer, toast } from "react-toastify";
-const Reviews = ({ gigId }) => {
+const Reviews = ({ gigId, user }) => {
   const queryClient = useQueryClient();
   const token = JSON.parse(localStorage.getItem("currentUser"))?.token;
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"))?.user;
 
   const { isLoading, error, data } = useQuery({
     queryKey: ["reviews"],
@@ -15,7 +16,6 @@ const Reviews = ({ gigId }) => {
         return res.data;
       }),
   });
-
   const mutation = useMutation({
     mutationFn: async (review) => {
       return await newRequest.post(`/reviews?accessToken=${token}`, review);
@@ -32,17 +32,21 @@ const Reviews = ({ gigId }) => {
   });
 
   const handleSubmit = (e) => {
-    const { user } = JSON.parse(localStorage.getItem("currentUser"));
     e.preventDefault();
+    if (user.username === currentUser?.username) {
+      toast.warning("Bạn không thể đánh giá công việc của mình!", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+      return;
+    }
     const desc = e.target[0].value;
     const star = e.target[1].value;
     mutation.mutate({
       gigId: gigId,
       desc: desc,
       star: star,
-      userId: user?._id,
+      userId: currentUser?._id,
     });
-    console.log(desc, star, gigId, user?._id);
   };
 
   return (

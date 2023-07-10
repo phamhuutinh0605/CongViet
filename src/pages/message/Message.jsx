@@ -41,14 +41,19 @@ const Message = () => {
     <div className="message">
       <div className="container">
         <span className="breadcrumbs">
-          <Link to="/messages">Tin nhắn</Link> {">"} John Doe {">"}
+          <Link to="/messages">Trở về</Link>
         </span>
         {isLoading ? (
           <LoadingPage />
         ) : error ? (
           "Error"
         ) : (
-          <div className="messages">
+          <div
+            className="messages"
+            style={{
+              position: "relative",
+            }}
+          >
             {data.map((m) => (
               <div
                 className={m.userId === currentUser._id ? "owner item" : "item"}

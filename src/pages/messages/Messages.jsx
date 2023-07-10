@@ -1,11 +1,10 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import React from "react";
+import React, { useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import newRequest from "../../utils/newRequest";
 import "./Messages.scss";
 import moment from "moment";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 
 const Messages = () => {
   const currentUser = JSON.parse(localStorage.getItem("currentUser"))?.user;
@@ -36,13 +35,6 @@ const Messages = () => {
   useEffect(() => {
     refetch();
   }, [data]);
-  // const [users, setUsers] = useState();
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     await newRequest.get("/users").then((res) => setUsers(res.data));
-  //   }
-  //   fetchData();
-  // }, []);
   return (
     <div className="messages">
       {isLoading ? (
@@ -75,7 +67,12 @@ const Messages = () => {
                   }
                   key={c.id}
                 >
-                  <td>{currentUser.isSeller ? c.buyerId : c.sellerId}</td>
+                  <td>
+                    {currentUser.isSeller ? c.username : c.usernameSeller}
+                    {/* {c.buyerId === currentUser._id
+                      ? c.usernameSeller
+                      : c.username} */}
+                  </td>
                   <td>
                     <Link to={`/message/${c.id}`} className="link">
                       {c?.lastMessage?.substring(0, 100)}...

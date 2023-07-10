@@ -6,7 +6,8 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import newRequest from "../../utils/newRequest";
 import Reviews from "../../components/reviews/Reviews";
 import { formatDate } from "../../utils/formatDate";
-
+import { ToastContainer, toast } from "react-toastify";
+import { formatPrice } from "../../utils/formatPrice";
 function Gig() {
   const { id } = useParams();
   const currentUser = JSON.parse(localStorage.getItem("currentUser"))?.user;
@@ -33,18 +34,44 @@ function Gig() {
   });
 
   const navigate = useNavigate();
-
+  const handlePayment = () => {
+    if (currentUser.isSeller) {
+      toast.warning("Phương thức chỉ dành cho Nhà Tuyển Dụng!", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    } else {
+      navigate(`/pay/${id}`);
+    }
+  };
   const handleContact = async () => {
+    if (dataUser.isSeller || currentUser.isSeller) {
+      toast.warning("Bạn chỉ có thể liên hệ với Nhà Tuyển Dụng!", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+      return;
+    }
     const sellerId = userId;
     const buyerId = currentUser?._id;
     const id = sellerId + buyerId;
 
     try {
-      const res = await newRequest.post(`/conversations?accessToken=${token}`, {
-        to: currentUser.isSeller ? buyerId : sellerId,
-      });
+      const res = await newRequest.get(
+        `/conversations/single/${id}?accessToken=${token}`
+      );
       navigate(`/message/${res.data.id}`);
-    } catch (err) {}
+    } catch (err) {
+      if (err.response.status === 404 || err.response.status === 500) {
+        const res = await newRequest.post(
+          `/conversations?accessToken=${token}`,
+          {
+            to: currentUser.isSeller ? buyerId : sellerId,
+            username: currentUser?.username,
+            usernameSeller: dataUser?.username,
+          }
+        );
+        navigate(`/message/${res.data.id}`);
+      }
+    }
   };
   return (
     <div className="gig">
@@ -154,12 +181,12 @@ function Gig() {
                 </div>
               </div>
             )}
-            <Reviews gigId={id} />
+            <Reviews gigId={id} user={dataUser} />
           </div>
           <div className="right">
             <div className="price">
               <h3>{data?.shortTitle}</h3>
-              <h2>{data?.price}</h2>
+              <h2>{formatPrice(data?.price)}</h2>
             </div>
             <p>{data.shortDesc}</p>
             <div className="details">
@@ -180,12 +207,11 @@ function Gig() {
                 </div>
               ))}
             </div>
-            <Link to={`/pay/${id}`}>
-              <button>Chốt đơn ngay</button>
-            </Link>
+            <button onClick={handlePayment}>Chốt đơn ngay</button>
           </div>
         </div>
       )}
+      <ToastContainer />
     </div>
   );
 }
