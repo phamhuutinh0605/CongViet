@@ -19,6 +19,7 @@ const Messages = () => {
         return res.data;
       }),
   });
+  console.log(data);
   const mutation = useMutation({
     mutationFn: (id) => {
       return newRequest.put(`/conversations/${id}?accessToken=${token}`);
@@ -68,7 +69,9 @@ const Messages = () => {
                   key={c.id}
                 >
                   <td>
-                    {currentUser.isSeller ? c.username : c.usernameSeller}
+                    {currentUser.username == c.usernameSeller
+                      ? c.username
+                      : c.usernameSeller}
                     {/* {c.buyerId === currentUser._id
                       ? c.usernameSeller
                       : c.username} */}

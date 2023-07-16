@@ -8,12 +8,13 @@ import Reviews from "../../components/reviews/Reviews";
 import { formatDate } from "../../utils/formatDate";
 import { ToastContainer, toast } from "react-toastify";
 import { formatPrice } from "../../utils/formatPrice";
+import { useEffect } from "react";
 function Gig() {
   const { id } = useParams();
   const currentUser = JSON.parse(localStorage.getItem("currentUser"))?.user;
   const token = JSON.parse(localStorage.getItem("currentUser"))?.token;
   const { isLoading, error, data } = useQuery({
-    queryKey: ["gig"],
+    queryKey: [id],
     queryFn: () =>
       newRequest.get(`/gigs/${id}?accessToken=${token}`).then((res) => {
         return res.data;
@@ -32,7 +33,6 @@ function Gig() {
       }),
     enabled: !!userId,
   });
-
   const navigate = useNavigate();
   const handlePayment = () => {
     if (currentUser.isSeller) {
@@ -44,15 +44,15 @@ function Gig() {
     }
   };
   const handleContact = async () => {
-    if (dataUser.isSeller || currentUser.isSeller) {
-      toast.warning("Bạn chỉ có thể liên hệ với Nhà Tuyển Dụng!", {
-        position: toast.POSITION.TOP_CENTER,
-      });
-      return;
-    }
+    // if (dataUser.isSeller || currentUser.isSeller) {
+    //   toast.warning("Bạn chỉ có thể liên hệ với Nhà Tuyển Dụng!", {
+    //     position: toast.POSITION.TOP_CENTER,
+    //   });
+    //   return;
+    // }
     const sellerId = userId;
     const buyerId = currentUser?._id;
-    const id = sellerId + buyerId;
+    const id = buyerId + sellerId;
 
     try {
       const res = await newRequest.get(
@@ -64,9 +64,12 @@ function Gig() {
         const res = await newRequest.post(
           `/conversations?accessToken=${token}`,
           {
-            to: currentUser.isSeller ? buyerId : sellerId,
+            buyerId,
+            sellerId,
+            // to: currentUser.isSeller ? buyerId : sellerId,
             username: currentUser?.username,
             usernameSeller: dataUser?.username,
+            isSeller: currentUser.isSeller,
           }
         );
         navigate(`/message/${res.data.id}`);
@@ -97,7 +100,7 @@ function Gig() {
                   src={dataUser?.img || "/img/noavatar.jpg"}
                   alt=""
                 />
-                <span>{dataUser?.username}</span>
+                <span>{dataUser?.username} </span>
                 {!isNaN(data?.totalStars / data?.starNumber) && (
                   <div className="stars">
                     {Array(Math.round(data?.totalStars / data?.starNumber))
@@ -133,7 +136,10 @@ function Gig() {
                 <div className="user">
                   <img src={dataUser?.img || "/img/noavatar.jpg"} alt="" />
                   <div className="info">
-                    <span>{dataUser?.username}</span>
+                    <span>{dataUser?.username} </span>
+                    <h3 style={{ color: "#b22234", fontStyle: "italic" }}>
+                      {data?.isSeller == false ? "Nhà Tuyển Dụng" : ""}
+                    </h3>
                     {!isNaN(data?.totalStars / data?.starNumber) && (
                       <div className="stars">
                         {Array(Math.round(data?.totalStars / data?.starNumber))

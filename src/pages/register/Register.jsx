@@ -15,7 +15,10 @@ function Register() {
     country: "",
     isSeller: false,
     desc: "",
+    phone: "",
+    linkedIn: "",
   });
+  console.log(user);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -103,7 +106,25 @@ function Register() {
             maxLength={10}
             minLength={10}
           />
-          <label htmlFor="">Mô tả</label>
+          <label htmlFor="">
+            {" "}
+            Liên kết LinkedIn *{" "}
+            <a
+              href="https://www.linkedin.com/signup"
+              target="_blank"
+              style={{ fontSize: 13, marginLeft: 10, fontStyle: "italic" }}
+            >
+              Tạo tài khoản tại đây
+            </a>
+          </label>
+          <input
+            name="linkedIn"
+            type="text"
+            placeholder="https://www.linkedin.com"
+            onChange={handleChange}
+            required
+          />
+          <label htmlFor="">Mô tả về bản thân</label>
           <textarea
             placeholder="Hãy mô tả ngắn gọn về bạn..."
             name="desc"

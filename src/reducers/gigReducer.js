@@ -1,5 +1,5 @@
 export const INITIAL_STATE = {
-  userId: JSON.parse(localStorage.getItem("currentUser"))?.user._id,
+  userId: JSON.parse(localStorage.getItem("currentUser"))?.user?._id,
   title: "",
   cat: "",
   cover: "",
@@ -11,8 +11,10 @@ export const INITIAL_STATE = {
   revisionNumber: 0,
   features: [],
   price: 0,
-  accessToken: JSON.parse(localStorage.getItem("currentUser"))?.token,
+  isSeller: JSON.parse(localStorage.getItem("currentUser"))?.user?.isSeller,
+  // accessToken: JSON.parse(localStorage.getItem("currentUser"))?.token,
 };
+console.log(JSON.parse(localStorage.getItem("currentUser"))?.user);
 export const gigReducer = (state, action) => {
   switch (action.type) {
     case "CHANGE_INPUT":

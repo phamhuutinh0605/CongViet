@@ -7,7 +7,11 @@ import newRequest from "../../utils/newRequest";
 import LoadingPage from "../../pages/loading/LoadingPage";
 
 const GigCard = ({ item }) => {
+  console.log(item);
   const token = JSON.parse(localStorage.getItem("currentUser"))?.token;
+  const isSellerCurr = JSON.parse(localStorage.getItem("currentUser"))?.user
+    ?.isSeller;
+
   const { data, isLoading, error } = useQuery({
     queryKey: [item.userId],
     queryFn: async () => {
@@ -16,7 +20,7 @@ const GigCard = ({ item }) => {
         .then((res) => res.data);
     },
   });
-  return (
+  return isSellerCurr !== item.isSeller ? (
     <Link to={`/gig/${item._id}`} className="link">
       <div className="gigCard">
         <img src={item.img || item.cover} alt="" />
@@ -40,6 +44,28 @@ const GigCard = ({ item }) => {
               {Math.round(item.totalStars / item.starNumber) |
                 "Chưa có đánh giá nào!"}
             </span>
+            {/* <h3
+              style={{
+                color: "#b22234",
+                marginLeft: 60,
+              }}
+            >
+              {item.isSeller === false ? (
+                <>
+                  <h4>
+                    Tin nhà tuyển dụng{" "}
+                    <FontAwesomeIcon
+                      icon={faHome}
+                      style={{
+                        marginLeft: 4,
+                      }}
+                    />
+                  </h4>
+                </>
+              ) : (
+                ""
+              )}
+            </h3> */}
           </div>
         </div>
         <hr />
@@ -51,7 +77,8 @@ const GigCard = ({ item }) => {
         </div>
       </div>
     </Link>
+  ) : (
+    ""
   );
 };
-
 export default GigCard;

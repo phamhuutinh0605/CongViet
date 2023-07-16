@@ -12,7 +12,7 @@ function MyGigs() {
   const queryClient = useQueryClient();
 
   const { isLoading, error, data } = useQuery({
-    queryKey: [currentUser._id],
+    queryKey: [currentUser?._id],
     queryFn: () =>
       newRequest
         .get(`/gigs?userId=${currentUser._id}&accessToken=${token}`)
@@ -20,13 +20,13 @@ function MyGigs() {
           return res.data;
         }),
   });
-
+  console.log(data);
   const mutation = useMutation({
     mutationFn: (id) => {
-      return newRequest.delete(`/gigs/${id}`);
+      return newRequest.delete(`/gigs/${id}?accessToken=${token}`);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(["myGigs"]);
+      queryClient.invalidateQueries([currentUser?._id]);
     },
   });
 
@@ -44,9 +44,13 @@ function MyGigs() {
         <div className="container">
           <div className="title">
             <h1>Những công việc của bạn</h1>
-            {currentUser.isSeller && (
+            {currentUser.isSeller ? (
               <Link to="/add">
                 <button>Thêm công việc mới</button>
+              </Link>
+            ) : (
+              <Link to="/add">
+                <button>Đăng tin tuyển việc</button>
               </Link>
             )}
           </div>
@@ -58,7 +62,7 @@ function MyGigs() {
               <th>Ngày tạo</th>
               <th>Hành động</th>
             </tr>
-            {data.map((gig) => (
+            {data?.map((gig) => (
               <tr key={gig._id}>
                 <td>
                   <img className="image" src={gig.cover} alt="" />

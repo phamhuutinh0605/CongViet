@@ -1,10 +1,22 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./CatCard.scss";
+import { ToastContainer, toast } from "react-toastify";
 
 function CatCard({ card }) {
+  const navigate = useNavigate();
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"))?.user;
+  const validateUser = () => {
+    if (!currentUser) {
+      navigate(`/login`);
+      return toast.info("Bạn chưa đăng nhập", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    }
+    navigate(`/gigs?cat=${card.title}`);
+  };
   return (
-    <Link to={`/gigs?cat=${card.title}`}>
+    <Link onClick={validateUser}>
       <div className="catCard">
         <img src={card.img} alt="" />
         <span className="desc">{card.desc}</span>

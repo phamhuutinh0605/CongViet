@@ -16,7 +16,16 @@ function Login() {
     try {
       const res = await newRequest.post("/auth/login", { username, password });
       localStorage.setItem("currentUser", JSON.stringify(res.data));
+      if (res.data?.user?.isAdmin) {
+        const data = encodeURIComponent(JSON.stringify(res.data));
+        window.open(
+          // `https://congviet-admin.netlify.app?data=${res.data}`,
+          `http://localhost:5174?data=${data}`,
+          "_blank"
+        );
+      }
       navigate("/");
+      window.location.reload();
     } catch (err) {
       if (err) {
         toast.error(err?.response?.data, {

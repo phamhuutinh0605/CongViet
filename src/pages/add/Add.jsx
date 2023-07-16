@@ -41,7 +41,7 @@ const Add = () => {
           return url;
         })
       );
-      toast.success("Cập nhật thành công", {
+      toast.success("Cập nhật ảnh thành công", {
         position: toast.POSITION.TOP_CENTER,
       });
       setUploading(false);
@@ -65,9 +65,12 @@ const Add = () => {
         toast.success("Tạo công việc thành công", {
           position: toast.POSITION.BOTTOM_CENTER,
         });
+      // setTimeout(() => {
+      // }, 2000);
+      navigate("/mygigs");
     },
     onError: (err) => {
-      toast.error("Thất bại!", {
+      toast.error("Tạo công việc thất bại!", {
         position: toast.POSITION.TOP_RIGHT,
       });
     },
@@ -76,7 +79,7 @@ const Add = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     mutation.mutate(state);
-    // navigate("/mygigs")
+    console.log(state);
   };
   return (
     <div className="add">
@@ -101,13 +104,13 @@ const Add = () => {
                 );
               })}
             </select>
-            <label htmlFor="">Ảnh công việc</label>
+            <label htmlFor="">Ảnh bài đăng</label>
             <input
               type="file"
               onChange={(e) => setSingleFile(e.target.files[0])}
               required
             />
-            <label htmlFor="">Cập nhật ảnh</label>
+            <label htmlFor="">Ảnh công việc</label>
             <input
               type="file"
               multiple
@@ -117,7 +120,7 @@ const Add = () => {
             <button onClick={handleUpload}>
               {uploading ? "Đang cập nhật..." : "Cập nhật ảnh"}
             </button>
-            <label htmlFor="">Mô tả công việc</label>
+            <label htmlFor="">Mô tả bài đăng</label>
             <textarea
               name="desc"
               id=""
@@ -152,6 +155,7 @@ const Add = () => {
               type="number"
               name="revisionNumber"
               onChange={handleChange}
+              min={0}
             />
             <label htmlFor="">Thêm điểm nổi bật của bạn</label>
             <form action="" className="add" onSubmit={handleFeature}>

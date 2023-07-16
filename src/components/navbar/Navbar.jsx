@@ -80,19 +80,22 @@ function Navbar() {
                     <FontAwesomeIcon icon={faUserTie} />
                     {""} Thông tin cá nhân
                   </Link>
-                  {user.isSeller && (
+                  {user.isSeller ? (
                     <>
                       <Link className="link" to="/mygigs">
                         <FontAwesomeIcon icon={faBriefcase} />
                         {""} Công việc của bạn
                       </Link>
-                      <Link className="link" to="/add">
-                        <FontAwesomeIcon icon={faFileCirclePlus} />
-                        {""} Thêm công việc mới
-                      </Link>
                       <Link className="link" to="/orders">
                         <FontAwesomeIcon icon={faSackDollar} />
                         {""} Đơn hàng
+                      </Link>
+                    </>
+                  ) : (
+                    <>
+                      <Link className="link" to="/mygigs">
+                        <FontAwesomeIcon icon={faBriefcase} />
+                        {""} Quản lý công việc
                       </Link>
                     </>
                   )}
