@@ -5,7 +5,6 @@ import { useQuery } from "@tanstack/react-query";
 import newRequest from "../../utils/newRequest";
 import { useLocation } from "react-router-dom";
 import LoadingPage from "../loading/LoadingPage";
-import { ToastContainer, toast } from "react-toastify";
 
 function Gigs() {
   const [sort, setSort] = useState("sales");
