@@ -86,21 +86,15 @@ function Gig() {
         <div className="container">
           <div className="left">
             <span className="breadcrumbs">
-              CôngVIỆT {">"} {data?.title} {">"}
+              CôngVIỆT {">"} {data?.cat}
             </span>
             <h1>{data?.title}</h1>
             {isLoadingUser ? (
-              "loading"
+              "Loading..."
             ) : errorUser ? (
               "Something went wrong!"
             ) : (
               <div className="user">
-                <img
-                  className="pp"
-                  src={dataUser?.img || "/img/noavatar.jpg"}
-                  alt=""
-                />
-                <span>{dataUser?.username} </span>
                 {!isNaN(data?.totalStars / data?.starNumber) && (
                   <div className="stars">
                     {Array(Math.round(data?.totalStars / data?.starNumber))
