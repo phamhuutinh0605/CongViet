@@ -1,5 +1,5 @@
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Orders.scss";
 import { useQuery } from "@tanstack/react-query";
 import newRequest from "../../utils/newRequest";
@@ -8,7 +8,6 @@ import LoadingPage from "../loading/LoadingPage";
 const Orders = () => {
   const currentUser = JSON.parse(localStorage.getItem("currentUser"))?.user;
   const token = JSON.parse(localStorage.getItem("currentUser"))?.token;
-
   const navigate = useNavigate();
   const { isLoading, error, data } = useQuery({
     queryKey: ["orders"],
@@ -21,19 +20,22 @@ const Orders = () => {
   const handleContact = async (order) => {
     const sellerId = order.sellerId;
     const buyerId = order.buyerId;
-    const id = sellerId + buyerId;
-
+    const id = buyerId + sellerId;
     try {
       const res = await newRequest.get(
         `/conversations/single/${id}?accessToken=${token}`
       );
-      navigate(`/message/${res.data.id}`);
+      navigate(`/messages`);
     } catch (err) {
-      if (err.response.status === 404) {
+      if (err.response.status === 404 || err.response.status === 500) {
         const res = await newRequest.post(
           `/conversations?accessToken=${token}`,
           {
-            to: currentUser.isSeller ? buyerId : sellerId,
+            buyerId,
+            sellerId,
+            username: order?.usernameBuyer,
+            usernameSeller: currentUser?.username,
+            isSeller: currentUser.isSeller,
           }
         );
         navigate(`/message/${res.data.id}`);

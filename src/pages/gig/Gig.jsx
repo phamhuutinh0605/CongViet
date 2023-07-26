@@ -2,13 +2,12 @@ import React from "react";
 import "./Gig.scss";
 import { Slider } from "infinite-react-carousel/lib";
 import { useQuery } from "@tanstack/react-query";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import newRequest from "../../utils/newRequest";
 import Reviews from "../../components/reviews/Reviews";
 import { formatDate } from "../../utils/formatDate";
 import { ToastContainer, toast } from "react-toastify";
 import { formatPrice } from "../../utils/formatPrice";
-import { useEffect } from "react";
 function Gig() {
   const { id } = useParams();
   const currentUser = JSON.parse(localStorage.getItem("currentUser"))?.user;
@@ -44,12 +43,6 @@ function Gig() {
     }
   };
   const handleContact = async () => {
-    // if (dataUser.isSeller || currentUser.isSeller) {
-    //   toast.warning("Bạn chỉ có thể liên hệ với Nhà Tuyển Dụng!", {
-    //     position: toast.POSITION.TOP_CENTER,
-    //   });
-    //   return;
-    // }
     const sellerId = userId;
     const buyerId = currentUser?._id;
     const id = buyerId + sellerId;
@@ -58,7 +51,7 @@ function Gig() {
       const res = await newRequest.get(
         `/conversations/single/${id}?accessToken=${token}`
       );
-      navigate(`/message/${res.data.id}`);
+      navigate(`/messages`);
     } catch (err) {
       if (err.response.status === 404 || err.response.status === 500) {
         const res = await newRequest.post(
@@ -66,7 +59,6 @@ function Gig() {
           {
             buyerId,
             sellerId,
-            // to: currentUser.isSeller ? buyerId : sellerId,
             username: currentUser?.username,
             usernameSeller: dataUser?.username,
             isSeller: currentUser.isSeller,

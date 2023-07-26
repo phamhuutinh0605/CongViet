@@ -11,6 +11,7 @@ const stripePromise = loadStripe(
 );
 const Pay = () => {
   const token = JSON.parse(localStorage.getItem("currentUser"))?.token;
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"))?.user;
   const [clientSecret, setClientSecret] = useState("");
 
   const { id } = useParams();
@@ -19,7 +20,10 @@ const Pay = () => {
     const makeRequest = async () => {
       try {
         const res = await newRequest.post(
-          `/orders/create-payment-intent/${id}?accessToken=${token}`
+          `/orders/create-payment-intent/${id}?accessToken=${token}`,
+          {
+            usernameBuyer: currentUser?.username,
+          }
         );
         setClientSecret(res.data.clientSecret);
       } catch (err) {
