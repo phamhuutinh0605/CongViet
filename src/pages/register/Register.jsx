@@ -112,7 +112,7 @@ function Register() {
             <a
               href="https://www.linkedin.com/signup"
               target="_blank"
-              style={{ fontSize: 13, marginLeft: 10, fontStyle: "italic" }}
+              style={{ fontSize: 13, marginLeft: 10, fontStyle: "italic" }} rel="noreferrer"
             >
               Tạo tài khoản tại đây
             </a>
