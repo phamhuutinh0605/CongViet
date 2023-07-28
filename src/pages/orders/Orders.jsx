@@ -18,6 +18,7 @@ const Orders = () => {
   });
 
   const handleContact = async (order) => {
+    console.log(order?.usernameBuyer)
     const sellerId = order.sellerId;
     const buyerId = order.buyerId;
     const id = buyerId + sellerId;
@@ -55,6 +56,7 @@ const Orders = () => {
           </div>
           <table>
             <tr>
+              <th>Người đặt</th>
               <th>Hình ảnh</th>
               <th>Tiêu đề</th>
               <th>Giá</th>
@@ -64,6 +66,7 @@ const Orders = () => {
               ? "Bạn chưa có đơn hàng nào!"
               : data?.map((order) => (
                   <tr key={order._id}>
+                    <td>{order?.usernameBuyer}</td>
                     <td>
                       <img className="image" src={order.img} alt="" />
                     </td>

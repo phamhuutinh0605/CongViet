@@ -15,11 +15,14 @@ const Messages = () => {
   const { isLoading, error, data, refetch } = useQuery({
     queryKey: ["conversations"],
     queryFn: () =>
-      newRequest.get(`/conversations?accessToken=${token}`).then((res) => {
+        newRequest.get(`/conversations?accessToken=${token}`,{
+        userId:currentUser?._id,
+        isSeller:currentUser?.isSeller
+      }).then((res) => {
         return res.data;
-      }),
+      })
   });
-  console.log(data);
+  console.log(data)
   const mutation = useMutation({
     mutationFn: (id) => {
       return newRequest.put(`/conversations/${id}?accessToken=${token}`);

@@ -7,7 +7,7 @@ export const cards = [
   },
   {
     id: 2,
-    title: "Thiết kế Nội Thất",
+    title: "Thiết Kế Nội Thất",
     desc: "Xây dựng thương hiệu của bạn",
     img: "https://images.pexels.com/photos/11295165/pexels-photo-11295165.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
   },

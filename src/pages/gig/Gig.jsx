@@ -160,7 +160,7 @@ function Gig() {
                       <span className="desc">4 giờ</span>
                     </div>
                     <div className="item">
-                      <span className="title">Giao hàng gần nhất</span>
+                      <span className="title">Hoàn thành gần nhất</span>
                       <span className="desc">1 ngày</span>
                     </div>
                     <div className="item">
@@ -184,7 +184,7 @@ function Gig() {
             <div className="details">
               <div className="item">
                 <img src="/img/clock.png" alt="" />
-                <span>Giao hàng trong {data?.deliveryTime} ngày</span>
+                <span>Hoàn thành trong {data?.deliveryTime} ngày</span>
               </div>
               <div className="item">
                 <img src="/img/recycle.png" alt="" />
